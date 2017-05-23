@@ -1,0 +1,39 @@
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\bin\Release\PixelRenderer.exe.config
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\bin\Release\PixelRenderer.exe
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\bin\Release\PixelRenderer.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\bin\Release\DP12MST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\bin\Release\DP12SST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\bin\Release\DP13MST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\bin\Release\DP13SST.cs.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\bin\Release\FPSProbeMgrInterface.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\obj\Release\PixelRenderer.Form1.resources
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\obj\Release\PixelRenderer.Runerror.resources
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\obj\Release\PixelRenderer.Properties.Resources.resources
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\obj\Release\PixelRenderer.csproj.GenerateResource.Cache
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\obj\Release\PixelRenderer.exe
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\obj\Release\PixelRenderer.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0\PixelRenderer\obj\Release\PixelRenderer.csprojResolveAssemblyReference.cache
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\PixelRenderer.exe.config
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\Interop.WMPLib.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\AxInterop.WMPLib.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.csproj.ResolveComReference.cache
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.exe
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\PixelRenderer.exe
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\PixelRenderer.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\DP12MST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\DP12SST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\DP13MST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\DP13SST.cs.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\FPSProbeMgrInterface.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\NAudio.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\NAudio.xml
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\Interop.WMPLib.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\bin\Release\AxInterop.WMPLib.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.AudioRendererCtrl.resources
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.Runerror.resources
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.MainForm.resources
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.Properties.Resources.resources
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.csproj.GenerateResource.Cache
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.csprojResolveAssemblyReference.cache
+C:\Users\Sean Finegan\Documents\PixelRenderer2.0 - Copy (2)\PixelRenderer\obj\Release\PixelRenderer.FrameVideoRendererCtrl.resources

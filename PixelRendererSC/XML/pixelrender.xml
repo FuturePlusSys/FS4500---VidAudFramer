@@ -1,0 +1,33 @@
+<?xml version= "1.0" encoding = "utf-8" ?>
+<Protocal>
+ <SST-1.2>
+	<SST-1.2 Name = "Event" StartBit = "57" Width = "8"/>
+	<SST-1.2 Name = "Lane0" StartBit = "37" Width = "8"/>
+	<SST-1.2 Name = "Lane1" StartBit = "27" Width = "8"/>
+	<SST-1.2 Name = "Lane2" StartBit = "17" Width = "8"/>
+	<SST-1.2 Name = "Lane3" StartBit = "7" Width = "8"/>
+ </SST-1.2>
+ <MST-1.2>
+	<MST-1.2 Name = "Event" StartBit = "57" Width = "8"/>
+	<MST-1.2 Name = "Lane0" StartBit = "37" Width = "8"/>
+	<MST-1.2 Name = "Lane1" StartBit = "27" Width = "8"/>
+	<MST-1.2 Name = "Lane2" StartBit = "17" Width = "8"/>
+	<MST-1.2 Name = "Lane3" StartBit = "7" Width = "8"/>
+ </MST-1.2>
+ <SST-1.4>
+	<SST-1.4 Name = "Event" StartBit = "57" Width = "8"/>
+	<SST-1.4 Name = "Lane0" StartBit = "37" Width = "8"/>
+	<SST-1.4 Name = "Lane1" StartBit = "27" Width = "8"/>
+	<SST-1.4 Name = "Lane2" StartBit = "17" Width = "8"/>
+	<SST-1.4 Name = "Lane3" StartBit = "7" Width = "8"/>
+ </SST-1.4>
+ <MST-1.4>
+	<MST-1.4 Name = "Event" StartBit = "57" Width = "8"/>
+	<MST-1.4 Name = "Lane0" StartBit = "37" Width = "8"/>
+	<MST-1.4 Name = "Lane1" StartBit = "27" Width = "8"/>
+	<MST-1.4 Name = "Lane2" StartBit = "17" Width = "8"/>
+	<MST-1.4 Name = "Lane3" StartBit = "7" Width = "8"/>
+ </MST-1.4>
+</Protocal>
+	
+	
