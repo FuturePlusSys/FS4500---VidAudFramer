@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,9 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DP12MSTClassLibrary;
-using DP13MSTClassLibrary;
+using DP14MSTClassLibrary;
 using DP12SSTClassLibrary;
-using DP13SSTClassLibrary;
+using DP14SSTClassLibrary;
 using FPSProbeMgr_Gen2;
 using SharedProject1;
 using System.Xml;
@@ -26,8 +26,8 @@ namespace PixelRenderer
         //private DP11SST m_DP11aProbe = null;
         private DP12SST m_DP12SSTProbe = null;
         private DP12MST m_DP12MSTProbe = null;
-        private DP13SST m_DP13SSTProbe = null;
-        private DP13MST m_DP13MSTProbe = null;
+        private DP14SST m_DP14SSTProbe = null;
+        private DP14MST m_DP14MSTProbe = null;
         IProbeMgrGen2 m_IProbe = null;              // this sets us up for polymorphism...  because DP12MST inherits the FPSProbeMgrGen2 interface,
                                                     // then all the different probe versions can be assigned to this one base type.
         private List<long> pixelList = new List<long>();
@@ -260,6 +260,7 @@ namespace PixelRenderer
         private void paintbutton_Click(object sender, EventArgs e)
         {
             this.progressBar1.Value = 0;
+            PictureBox.Image = null;
             Protocol = getprotocol();
             int states = 0;
             if (Protocol == "error")
@@ -273,11 +274,12 @@ namespace PixelRenderer
             {
                 createInterfaceObject();  // assign the m_IProbe variable.
                 m_IProbe.Initialize();
-                if ((DP1_2SSTbutton.Checked == true || DP1_4SSTbutton.Checked == true) && getvc() == 0)
+                if ((DP1_2MSTbutton.Checked == true || DP1_4MSTbutton.Checked == true) && getvc() == 0)
                 {
                     string err = "No Virtual Channel selected in MST mode";
                     Runerror error = new Runerror(err);
                     error.Show();
+                    Format = " ";
                 }
                 else
                 {
@@ -308,7 +310,7 @@ namespace PixelRenderer
             xmlreader();
             if (states == 0)
             {
-                string err = "No states found. Check Protocal";
+                string err = "No states found. Check Protocal or Probe Manager";
                 Runerror error = new Runerror(err);
                 error.Show();
                 Format = " ";
@@ -364,16 +366,16 @@ namespace PixelRenderer
                     m_IProbe = (IProbeMgrGen2)m_DP12MSTProbe;
                     break;
                 case "SST-1.4":
-                    if (m_DP13SSTProbe != null)
-                        m_DP13SSTProbe = null;
-                    m_DP13SSTProbe = new DP13SST();
-                    m_IProbe = (IProbeMgrGen2)m_DP13SSTProbe;
+                    if (m_DP14SSTProbe != null)
+                        m_DP14SSTProbe = null;
+                    m_DP14SSTProbe = new DP14SST();
+                    m_IProbe = (IProbeMgrGen2)m_DP14SSTProbe;
                     break;
                 case "MST-1.4":
-                    if (m_DP13MSTProbe != null)
-                        m_DP13MSTProbe = null;
-                    m_DP13MSTProbe = new DP13MST();
-                    m_IProbe = (IProbeMgrGen2)m_DP13MSTProbe;
+                    if (m_DP14MSTProbe != null)
+                        m_DP14MSTProbe = null;
+                    m_DP14MSTProbe = new DP14MST();
+                    m_IProbe = (IProbeMgrGen2)m_DP14MSTProbe;
                     break;
             }
             //    if (m_DP11aProbe != null)
@@ -483,7 +485,7 @@ namespace PixelRenderer
         private int getvc()
         {
             int vc = 0;
-            if (getprotocol() == "SST-1.3" || getprotocol() == "SST-1.2")
+            if (getprotocol() == "SST-1.4" || getprotocol() == "SST-1.2")
             {
                 vc = 1;
             }
@@ -828,36 +830,36 @@ namespace PixelRenderer
             List<byte> comp = new List<byte>();
             double bytes = Math.Ceiling(width / 8.00); //Number of bytes that will be required
             int bits = Convert.ToInt32(((bytes - 1) * 8)); //Number of bits - 8, this is used for shifting.
+            if (pixeldata.Count - state == 5 && decoywid == 30) //Weird case where the 30 bit width requires 5 bytes instead of the usual 4. 
+            {
+                bits += 8;
+                width += 8;
+            }
             while (width > 0)
             {
-                if (pixeldata.Count - state == 5 && decoywid == 30) //Weird case where the 30 bit width requires 5 bytes instead of the usual 4.
-                {
-                    bits += 8;
-                    width += 8;
-                }
                 width = width - 8;
                 comp = Getlanedata(pixeldata[state]);
                 if (bits == 0)
                 {
-                    pixel1 |= (ulong)(comp[0]);
+                    pixel1 |= comp[0];
+                    pixel2 |= comp[1];
+                    pixel3 |= comp[2];
+                    pixel4 |= comp[3];
                     pixel1 = pixel1 >> remander;
                     pixel1 = pixel1 & (ulong)Mask;
-                    pixel2 |= (ulong)(comp[1]);
                     pixel2 = pixel2 >> remander;
                     pixel2 = pixel2 & (ulong)Mask;
-                    pixel3 |= (ulong)(comp[2]);
                     pixel3 = pixel3 >> remander;
                     pixel3 = pixel3 & (ulong)Mask;
-                    pixel4 |= (ulong)(comp[3]);
                     pixel4 = pixel4 >> remander;
                     pixel4 = pixel4 & (ulong)Mask;
                 }
                 else
                 {
-                    pixel1 |= (uint)(comp[0] << bits);
-                    pixel2 |= (uint)(comp[1] << bits);
-                    pixel3 |= (uint)(comp[2] << bits);
-                    pixel4 |= (uint)(comp[3] << bits);
+                    pixel1 |= (ulong)(Convert.ToInt64(comp[0]) << bits); //Error where the bits were not shifting when bits == 32. Converted comp to long to fix error.
+                    pixel2 |= (ulong)(Convert.ToInt64(comp[1]) << bits);
+                    pixel3 |= (ulong)(Convert.ToInt64(comp[2]) << bits);
+                    pixel4 |= (ulong)(Convert.ToInt64(comp[3]) << bits);
                     state++;
                     bits -= 8;
                 }
@@ -1522,7 +1524,7 @@ namespace PixelRenderer
                 {
                     if (w == (int)WidthnumericUpDown.Value) //If w equals the inputed width, width most be to small
                     {
-                        string e = "More pixels found, width to small";
+                        string e = "Not enough pixel found to make up line, check MSA, width should equal" + w.ToString();
                         Runerror error = new Runerror(e);
                         error.Show();
                         break;
@@ -1561,7 +1563,7 @@ namespace PixelRenderer
                 {
                     if (w < (int)WidthnumericUpDown.Value) //If w equals the inputed width, width most be to small
                     {
-                        string e = "All pixels found, width to big";
+                        string e = "All pixels found on line found, check MSA correct width should equal" + w.ToString();
                         Runerror error = new Runerror(e);
                         error.Show();
                         PictureBox.Image = bmp;
@@ -1603,3 +1605,4 @@ namespace PixelRenderer
 
     }
 }
+
