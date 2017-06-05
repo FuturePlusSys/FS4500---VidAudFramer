@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DP12MSTClassLibrary;
-using DP13MSTClassLibrary;
+using DP14MSTClassLibrary;
 using DP12SSTClassLibrary;
-using DP13SSTClassLibrary;
+using DP14SSTClassLibrary;
 using FPSProbeMgr_Gen2;
 using SharedProject1;
 using System.Xml;
@@ -24,8 +24,8 @@ namespace PixelRenderer
         #region Members
         private DP12SST m_DP12SSTProbe = null;
         private DP12MST m_DP12MSTProbe = null;
-        private DP13SST m_DP13SSTProbe = null;
-        private DP13MST m_DP13MSTProbe = null;
+        private DP14SST m_DP14SSTProbe = null;
+        private DP14MST m_DP14MSTProbe = null;
         IProbeMgrGen2 m_IProbe = null;
 
         private string m_format = "";
@@ -414,16 +414,16 @@ namespace PixelRenderer
                     m_IProbe = (IProbeMgrGen2)m_DP12MSTProbe;
                     break;
                 case "SST-1.4":
-                    if (m_DP13SSTProbe != null)
-                        m_DP13SSTProbe = null;
-                    m_DP13SSTProbe = new DP13SST();
-                    m_IProbe = (IProbeMgrGen2)m_DP13SSTProbe;
+                    if (m_DP14SSTProbe != null)
+                        m_DP14SSTProbe = null;
+                    m_DP14SSTProbe = new DP14SST();
+                    m_IProbe = (IProbeMgrGen2)m_DP14SSTProbe;
                     break;
                 case "MST-1.4":
-                    if (m_DP13MSTProbe != null)
-                        m_DP13MSTProbe = null;
-                    m_DP13MSTProbe = new DP13MST();
-                    m_IProbe = (IProbeMgrGen2)m_DP13MSTProbe;
+                    if (m_DP14MSTProbe != null)
+                        m_DP14MSTProbe = null;
+                    m_DP14MSTProbe = new DP14MST();
+                    m_IProbe = (IProbeMgrGen2)m_DP14MSTProbe;
                     break;
             }
             return status;
