@@ -1,0 +1,71 @@
+<FS4500_Data_Format>
+  <DP1.1a>
+    <a1.1 Name="Spare" Type="Field" Width="12" DisplayOrder="1"/>
+    <a1.1 Name="Trigger_State" Type="Field" Width="1" DisplayOrder="2"/>
+    <a1.1  Name="Time_Count" Type="Field" Width="50" DisplayOrder="3"/>
+    <a1.1  Name="Data_Error" Type="Field" Width="1" DisplayOrder="4"/>
+    <a1.1  Name="Train1.1" Type="Field" Width="1" DisplayOrder="5"/>
+    <a1.1  Name="Pixel_Not_Recognized" Type="Field" Width="1" DisplayOrder="6"/>
+    <a1.1  Name="Event" Type="Field" Width="8" DisplayOrder="7"/>
+    <a1.1  Name="Data_Present" Type="Field" Width="4" DisplayOrder="8"/>
+    <a1.1  Name="Loss_of_Sync" Type="Field" Width="4" DisplayOrder="9"/>
+    <a1.1  Name="Lane0_Invalid" Type="Field" Width="1" DisplayOrder="10"/>
+    <a1.1  Name="Lane0_Command" Type="Field" Width="1" DisplayOrder="11"/>
+    <a1.1  Name="Lane0_Data" Type="Field" Width="8" DisplayOrder="12"/>
+	<a1.1  Name="Lane1_Invalid" Type="Field" Width="1" DisplayOrder="13"/>
+    <a1.1  Name="Lane1_Command" Type="Field" Width="1" DisplayOrder="14"/>
+    <a1.1  Name="Lane1_Data" Type="Field" Width="8" DisplayOrder="15"/>
+	<a1.1  Name="Lane2_Invalid" Type="Field" Width="1" DisplayOrder="16"/>
+    <a1.1  Name="Lane2_Command" Type="Field" Width="1" DisplayOrder="17"/>
+    <a1.1  Name="Lane2_Data" Type="Field" Width="8" DisplayOrder="18"/>
+	<a1.1  Name="Lane3_Invalid" Type="Field" Width="1" DisplayOrder="19"/>
+    <a1.1  Name="Lane3_Command" Type="Field" Width="1" DisplayOrder="20"/>
+    <a1.1  Name="Lane3_Data" Type="Field" Width="8" DisplayOrder="21"/>
+  </DP1.1a>
+  <DP1.4SST>
+    <SST1.4 Name="Spare" Type="Field" Width="12" DisplayOrder="1"/>
+    <SST1.4 Name="Trigger_State" Type="Field" Width="1" DisplayOrder="2"/>
+    <SST1.4 Name="Time_Count" Type="Field" Width="50" DisplayOrder="3"/>
+    <SST1.4 Name="Error" Type="Field" Width="3" DisplayOrder="4"/>
+    <SST1.4 Name="Spare" Type="Field" Width="3" DisplayOrder="5"/>
+    <SST1.4 Name="Pixel_Not_Recognized" Type="Field" Width="1" DisplayOrder="6"/>
+    <SST1.4 Name="Event" Type="Field" Width="8" DisplayOrder="7"/>
+    <SST1.4 Name="Spare" Type="Field" Width="6" DisplayOrder="8"/>
+    <SST1.4 Name="Loss_of_Sync" Type="Field" Width="4" DisplayOrder="9"/>
+    <SST1.4 Name="Lane0_Invalid" Type="Field" Width="1" DisplayOrder="10"/>
+    <SST1.4 Name="Lane0_Command" Type="Field" Width="1" DisplayOrder="11"/>
+    <SST1.4 Name="Lane0_Data" Type="Field" Width="8" DisplayOrder="12"/>
+	<SST1.4 Name="Lane1_Invalid" Type="Field" Width="1" DisplayOrder="13"/>
+    <SST1.4 Name="Lane1_Command" Type="Field" Width="1" DisplayOrder="14"/>
+    <SST1.4 Name="Lane1_Data" Type="Field" Width="8" DisplayOrder="15"/>
+	<SST1.4 Name="Lane2_Invalid" Type="Field" Width="1" DisplayOrder="16"/>
+    <SST1.4 Name="Lane2_Command" Type="Field" Width="1" DisplayOrder="17"/>
+    <SST1.4 Name="Lane2_Data" Type="Field" Width="8" DisplayOrder="18"/>
+	<SST1.4 Name="Lane3_Invalid" Type="Field" Width="1" DisplayOrder="19"/>
+    <SST1.4 Name="Lane3_Command" Type="Field" Width="1" DisplayOrder="20"/>
+    <SST1.4 Name="Lane3_Data" Type="Field" Width="8" DisplayOrder="21"/>
+  </DP1.4SST>
+  <DP1.4MST>
+    <MST1.4 Name="Spare" Type="Field" Width="12" DisplayOrder="1"/>
+    <MST1.4 Name="Trigger_State" Type="Field" Width="1" DisplayOrder="2"/>
+    <MST1.4 Name="Time_Count" Type="Field" Width="50" DisplayOrder="3"/>
+    <MST1.4 Name="Error" Type="Field" Width="3" DisplayOrder="4"/>
+    <MST1.4 Name="VCTag" Type="Field" Width="3" DisplayOrder="5"/>
+    <MST1.4 Name="Pixel_Not_Recognized" Type="Field" Width="1" DisplayOrder="6"/>
+    <MST1.4 Name="Event" Type="Field" Width="8" DisplayOrder="7"/>
+    <MST1.4 Name="Timeslot" Type="Field" Width="6" DisplayOrder="8"/>
+    <MST1.4 Name="Loss_of_Sync" Type="Field" Width="4" DisplayOrder="9"/>
+    <MST1.4 Name="Lane0_Invalid" Type="Field" Width="1" DisplayOrder="10"/>
+    <MST1.4 Name="Lane0_Command" Type="Field" Width="1" DisplayOrder="11"/>
+    <MST1.4 Name="Lane0_Data" Type="Field" Width="8" DisplayOrder="12"/>
+	<MST1.4 Name="Lane1_Invalid" Type="Field" Width="1" DisplayOrder="13"/>
+    <MST1.4 Name="Lane1_Command" Type="Field" Width="1" DisplayOrder="14"/>
+    <MST1.4 Name="Lane1_Data" Type="Field" Width="8" DisplayOrder="15"/>
+	<MST1.4 Name="Lane2_Invalid" Type="Field" Width="1" DisplayOrder="16"/>
+    <MST1.4 Name="Lane2_Command" Type="Field" Width="1" DisplayOrder="17"/>
+    <MST1.4 Name="Lane2_Data" Type="Field" Width="8" DisplayOrder="18"/>
+	<MST1.4 Name="Lane3_Invalid" Type="Field" Width="1" DisplayOrder="19"/>
+    <MST1.4 Name="Lane3_Command" Type="Field" Width="1" DisplayOrder="20"/>
+    <MST1.4 Name="Lane3_Data" Type="Field" Width="8" DisplayOrder="21"/>
+  </DP1.4MST>
+</FS4500_Data_Format>
