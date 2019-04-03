@@ -1,3 +1,5 @@
+﻿using System;
+using System.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,10 +19,43 @@ using System.Xml;
 using System.Collections;
 using System.IO;
 
-namespace PixelRenderer
+namespace FrameVideoRendererClassLibrary
 {
     public partial class FrameVideoRendererCtrl : UserControl
     {
+        /// <summary>
+        /// Used to pass CancellationToken to Task. Allows Cancel button to stop task
+        /// </summary>
+        private class GetAudioDataStateObject
+        {
+            public CancellationToken Token { get; set; }
+
+            public GetAudioDataStateObject(CancellationToken ct)
+            {
+                Token = ct;
+            }
+        }
+
+        public class MSAData
+        {
+            private string m_format = "";
+            public string Format { get { return m_format; } set { m_format = value; } }
+            private int m_pixelcomponent = 0;
+            public int PixelComponent { get { return m_pixelcomponent; } set { m_pixelcomponent = value; } }
+            private int m_width = 0;
+            public int Width { get { return m_width; } set { m_width = value; } }
+            private int m_height = 0;
+            public int Height { get { return m_height; } set { m_height = value; } }
+
+            public MSAData(string format, int pixelcomponent, int width, int height)
+            {
+                Format = format;
+                PixelComponent = pixelcomponent;
+                Width = width;
+                Height = height;
+            }
+        }
+
         #region Members
         //private DP11SST m_DP11aProbe = null;
         private DP12SST m_DP12SSTProbe = null;
@@ -31,24 +66,18 @@ namespace PixelRenderer
                                                     // then all the different probe versions can be assigned to this one base type.
         private List<long> pixelList = new List<long>();
 
-        private int m_width = 0;
-        private int Width { get { return m_width; } set { m_width = value; } }
-
-        private string m_format = "";
-        private string Format { get { return m_format; } set { m_format = value; } }
+        private List<PictureRenderer> pictures = new List<PictureRenderer>();
 
         private string m_protocol = "";
         private string Protocol { get { return m_protocol; } set { m_protocol = value; } }
 
-        private long m_mask = 0;
-        private long Mask { get { return m_mask; } set { m_mask = value; } }
-
+        private int m_lanes = 0;
+        private int Lanes { get { return m_lanes; } set { m_lanes = value; } }
         private int m_eventwidth = 0;
         private int EventWidth { get { return m_eventwidth; } set { m_eventwidth = value; } }
 
         private int m_eventsb = 0;
         private int Eventsb { get { return m_eventsb; } set { m_eventsb = value; } }
-
         private int m_lane0sb = 0;
         private int Lane0sb { get { return m_lane0sb; } set { m_lane0sb = value; } }
 
@@ -60,6 +89,21 @@ namespace PixelRenderer
 
         private int m_lane3sb = 0;
         private int Lane3sb { get { return m_lane3sb; } set { m_lane3sb = value; } }
+
+        private int m_triggerwidth = 0;
+        private int TriggerWidth { get { return m_triggerwidth; } set { m_triggerwidth = value; } }
+
+        private int m_triggersb = 0;
+        private int Triggersb { get { return m_triggersb; } set { m_triggersb = value; } }
+
+        private int m_statesbeforetrigger = 0;
+        private int StatesBeforeTrigger { get { return m_statesbeforetrigger; } set { m_statesbeforetrigger = value; } }
+
+        private string m_defaultFolderPath = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"FuturePlus\FS4500\Instance1");
+
+        private CancellationTokenSource m_tokenSource = null; //To be passed with task
+        private CancellationToken m_token = CancellationToken.None;
+
         #endregion // Members
 
         #region Ctor
@@ -75,8 +119,6 @@ namespace PixelRenderer
         #endregion // Ctor(s)
 
         #region Event Handlers
-
-
 
         /// <summary>
         /// Protocol selection event handler
@@ -94,6 +136,11 @@ namespace PixelRenderer
             VC3button.Checked = false;
             VC4button.Checked = false;
         }
+        /// <summary>
+        /// Protocol selection event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DP1_2MSTbutton_CheckedChanged(object sender, EventArgs e)
         {
             if (DP1_2MSTbutton.Checked == true)
@@ -104,6 +151,11 @@ namespace PixelRenderer
                 VC4button.Enabled = true;
             }
         }
+        /// <summary>
+        /// Protocol selection event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DP1_3SSTbutton_CheckedChanged(object sender, EventArgs e)
         {
             VC1button.Enabled = false;
@@ -115,6 +167,11 @@ namespace PixelRenderer
             VC3button.Checked = false;
             VC4button.Checked = false;
         }
+        /// <summary>
+        /// Protocol selection event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DP1_3MSTbutton_CheckedChanged(object sender, EventArgs e)
         {
             if (DP1_4MSTbutton.Checked == true)
@@ -125,224 +182,859 @@ namespace PixelRenderer
                 VC4button.Enabled = true;
             }
         }
-        private void RGBbutton_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Handles Event, When checked, PictureRender will popup, will close when unchecked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrameCheckBoxChecked(object sender, EventArgs e)
         {
-            if (RGBbutton.Checked == false && YCbCr444button.Checked == false)
+            if (sender is CheckBox)  
             {
-                RGBgroupbox.Enabled = false;
-                RGB18button.Checked = false;
-                RGB24button.Checked = false;
-                RGB30button.Checked = false;
-                RGB36button.Checked = false;
-                RGB48button.Checked = false;
+                // research the as operand... CheckBox myCheckbox = sender as Checkbox..
+                
+                // using(PictureRenderer picture = new PictureRenderer((Metadata)check.Tag))
+                // {
+
+                // }
+
+                // determine that the renderer form is not already create..
+                // if not created
+                //   instantiate PictureRenderer form.
+                //   show the form... PictureRenderer.Show();  .ShowDialog() is for modal mode
+                // else
+                //   update status msg label with erro msg
             }
-            else if (RGBbutton.Checked == true || YCbCr444button.Checked == true)
+
+
+            if (sender is CheckBox)
             {
-                RGBgroupbox.Enabled = true;
-            }
-            if (YCbCr422button.Checked == true)
-            {
-                YCbCr422groupbox.Enabled = true;
-            }
-            else if (YCbCr420button.Checked == true)
-            {
-                YCbCr420groupbox.Enabled = true;
-            }
-        }
-        private void YCbCr444button_CheckedChanged(object sender, EventArgs e)
-        {
-            if (RGBbutton.Checked == false && YCbCr444button.Checked == false)
-            {
-                RGBgroupbox.Enabled = false;
-                RGB18button.Checked = false;
-                RGB24button.Checked = false;
-                RGB30button.Checked = false;
-                RGB36button.Checked = false;
-                RGB48button.Checked = false;
-            }
-            else if (RGBbutton.Checked == true || YCbCr444button.Checked == true)
-            {
-                RGBgroupbox.Enabled = true;
-            }
-            if (YCbCr422button.Checked == true)
-            {
-                YCbCr422groupbox.Enabled = true;
-            }
-            else if (YCbCr420button.Checked == true)
-            {
-                YCbCr420groupbox.Enabled = true;
-            }
-        }
-        private void YCbCr422button_CheckedChanged(object sender, EventArgs e)
-        {
-            if (RGBbutton.Checked == true || YCbCr444button.Checked == true || YCbCr420button.Checked == true)
-            {
-                YCbCr422groupbox.Enabled = false;
-                YCbCr16button.Checked = false;
-                YCbCr20button.Checked = false;
-                YCbCr24button.Checked = false;
-                YCbCr32button.Checked = false;
-            }
-            else if (YCbCr422button.Checked == true)
-            {
-                YCbCr422groupbox.Enabled = true;
-            }
-        }
-        private void YCbCr420button_CheckedChanged(object sender, EventArgs e)
-        {
-            if (RGBbutton.Checked == true || YCbCr444button.Checked == true || YCbCr422button.Checked == true)
-            {
-                YCbCr420groupbox.Enabled = false;
-                YCbCr15button.Checked = false;
-                YCbCr18button.Checked = false;
-                YCbCr420_24button.Checked = false;
-            }
-            else if (YCbCr420button.Checked == true)
-            {
-                YCbCr420groupbox.Enabled = true;
-            }
-        }
-        private void Savebutton_Click(object sender, EventArgs e)
-        {
-            if (PictureBox.Image != null)
-            {
-                SaveFileDialog sfile = new SaveFileDialog();
-                sfile.Filter = "JPEG files(*.jpeg)|*.jpeg";
-                if (DialogResult.OK == sfile.ShowDialog())
+                CheckBox check = ((CheckBox)sender); //Get object reference associated with checkbox
+                if (check.Checked == true)
                 {
-                    this.PictureBox.Image.Save(sfile.FileName);
+                    PictureRenderer picture = new PictureRenderer((Metadata)check.Tag); //Overload Constructor, pass metadata
+                    picture.PaintingEvent += new Passon(processPaintEvent); //Initalize Event that will be used from PictureRenderer
+                    picture.GetPixelData += new Passon(getpixeldata); //Initalize Event that will be used from PictureRenderer
+                    picture.RequestPictureEvent += new Passon(getPicture);
+                    picture.CheckReferenceEvent += new Passon(checkReference);
+                    picture.CheckPictureEvent += new Passon(checkPicture);
+                    pictures.Add(picture); //Add picture to list
+                    picture.Show();
                 }
-            }
-        }
-        private void Clearbutton_Click(object sender, EventArgs e)
-        {
-            foreach (Control ctrl in this.Controls)
-            {
-                if (ctrl is GroupBox)
+                if (check.Checked == false)
                 {
-                    foreach (Control grpBoxCtrl in ctrl.Controls)
+                    foreach (PictureRenderer picture in pictures)
                     {
-                        if (grpBoxCtrl is RadioButton)
+                        if (picture.Frameid == ((Metadata)check.Tag).Frameid) //Find picturerenderer associated with checkbox
                         {
-                            if (((RadioButton)grpBoxCtrl).Checked == true)
-                            {
-                                ((RadioButton)grpBoxCtrl).Checked = false;
-                            }
-                        }
-                        else if (grpBoxCtrl is CheckBox)
-                        {
-                            if (((CheckBox)grpBoxCtrl).Checked == true)
-                            {
-                                ((CheckBox)grpBoxCtrl).Checked = false;
-                            }
-                        }
-                        else if (grpBoxCtrl is GroupBox)
-                        {
-                            foreach (Control grpbox in grpBoxCtrl.Controls)
-                            {
-                                if (grpbox is RadioButton)
-                                {
-                                    if (((RadioButton)grpbox).Checked == true)
-                                    {
-                                        ((RadioButton)grpbox).Checked = false;
-                                    }
-                                }
-                            }
+                            picture.Close();
+                            pictures.Remove(picture);
+                            break;
                         }
                     }
                 }
             }
-            PictureBox.Image = null;
-            DefaultSetup();
-            StateNumberNumericUpDown.Value = 0;
         }
-        private void paintbutton_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// If picture renderer painting, disable all other forms, when done enable them again.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void processPaintEvent(object sender, EventArgs e)
         {
-            this.progressBar1.Value = 0;
-            PictureBox.Image = null;
-            Protocol = getprotocol();
-            int states = 0;
-            if (Protocol == "error")
+            if (((PaintingEventArgs)e).Painting == true)
             {
-                string err = "No Protocal selected";
-                Runerror error = new Runerror(err);
-                error.Show();
-                Format = " ";
+                this.Enabled = false; //Disable main form
+                foreach (PictureRenderer picture in pictures)
+                {
+                    if (picture.Frameid != ((PaintingEventArgs)e).Frameid) //Disable any form besides one painting
+                    {
+                        picture.Enabled = false;
+                    }
+                }
             }
             else
             {
-                createInterfaceObject();  // assign the m_IProbe variable.
-                m_IProbe.Initialize();
-                if ((DP1_2MSTbutton.Checked == true || DP1_4MSTbutton.Checked == true) && getvc() == 0)
+                this.Enabled = true;
+                foreach (PictureRenderer picture in pictures)
                 {
-                    string err = "No Virtual Channel selected in MST mode";
-                    Runerror error = new Runerror(err);
-                    error.Show();
-                    Format = " ";
+                    if (picture.Frameid != ((PaintingEventArgs)e).Frameid)
+                    {
+                        picture.Enabled = true;
+                    }
+                }
+            }
+        }
+
+        private void checkReference(object sender, EventArgs e)
+        {
+            foreach (Control control in ComparePanel.Controls)
+            {
+                if (control is CheckBox)
+                {
+                    CheckBox check = ((CheckBox)control);
+                    if (check.Font.Bold)
+                    {
+                        ((CheckReferenceArgs)e).ReferenceCheck = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void checkPicture(object sender, EventArgs e)
+        {
+            string text = "Frame: " + ((CheckPictureArgs)e).FrameID.ToString() + " ";
+            foreach (Control control in ComparePanel.Controls)
+            {
+                if (control is CheckBox)
+                {
+                    CheckBox check = ((CheckBox)control);
+                    if (check.Text == text || check.Text == (text + "Reference"))
+                    {
+                        ComparePanel.Controls.Remove(check);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// If picture renderer requests data, fill eventargs with data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void getpixeldata(object sender, EventArgs e)
+        {
+            List<byte> data = m_IProbe.GetStateDataChunk(((GettingPixelDataArgs)e).Stateindex, ((GettingPixelDataArgs)e).Statechunk, ((GettingPixelDataArgs)e).VC);
+            ((GettingPixelDataArgs)e).Statedata = data;
+        }
+        /// <summary>
+        /// Add List of Pixels to checkbox associated with frame
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void getPicture(object sender, EventArgs e)
+        {
+            string checktext = "Frame: " + ((SendingPictureArgs)e).Frameid.ToString() + " " + ((SendingPictureArgs)e).Reference;
+            bool add = true;
+            foreach (Control control in ComparePanel.Controls) //If this frame has been added before
+            {
+                if (control is CheckBox)
+                {
+                    CheckBox checkbox = ((CheckBox)control);
+                    if (checktext == checkbox.Text)
+                    {
+                        add = false;
+                    }
+                }
+            }
+            if (add == true) //Add since frame not in panel
+            {
+                CheckBox check = new CheckBox();
+                if (((SendingPictureArgs)e).Reference != "")
+                {
+                    check.Font = new Font(DefaultFont.FontFamily, DefaultFont.Size, FontStyle.Bold);
+                }
+                check.Text = checktext;
+                check.Tag = ((SendingPictureArgs)e).Pixels;
+                ComparePanel.Controls.Add(check);
+            }
+                
+        }
+        /// <summary>
+        /// Used to select file path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Browsebutton_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+
+            if (folderDialog.ShowDialog() == DialogResult.OK)
+            {
+                DataFolderPath_TextBox.Text = folderDialog.SelectedPath;
+            }
+        }
+        /// <summary>
+        /// Stop collecting frames and stop async task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            if (m_tokenSource != null)
+                m_tokenSource.Cancel();
+        }
+        /// <summary>
+        /// Initial setup, preparing to get frames
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GetFramesbutton_Click(object sender, EventArgs e)
+        {
+            Protocol = getprotocol(); //Save Protocol
+            bool errorflag = false; //If error, will prevent program from collecting frames
+            string error = "";
+            if (Directory.Exists(m_defaultFolderPath))
+            {
+                if (Protocol == "error")
+                {
+                    error = "No Protocol Selected";
+                    errorflag = true;
+                    Runerror err = new Runerror(error);
+                    err.Show();
                 }
                 else
                 {
-                    states = Convert.ToInt32(m_IProbe.GetNumberOfStates(getvc()));
+                    createInterfaceObject();  // assign the m_IProbe variable.
+                    m_IProbe.Initialize();
                 }
-            }
-            if (pixelList.Count != 0)
-            {
-                pixelList.Clear();
-            }
-            int lane = 0;
-            if (Lane1button.Checked)
-            {
-                lane = 1;
-            }
-            else if (Lane2button.Checked)
-            {
-                lane = 2;
-            }
-            else if (lane4button.Checked)
-            {
-                lane = 4;
-            }
-
-            Width = getpixelwidth();
-            Format = getformat();
-            Mask = getmask(Width);
-            xmlreader();
-            if (states == 0)
-            {
-                string err = "No states found. Check Protocal or Probe Manager";
-                Runerror error = new Runerror(err);
-                error.Show();
-                Format = " ";
-            }
-            if ((int)WidthnumericUpDown.Value == 0 || (int)HeightnumericUpDown.Value == 0)
-            {
-                string err = "Set bitmap Dimentions";
-                Runerror error = new Runerror(err);
-                error.Show();
-                Format = " ";
+                if (Lane1button.Checked)
+                {
+                    Lanes = 1;
+                }
+                else if (Lane2button.Checked)
+                {
+                    Lanes = 2;
+                }
+                else if (lane4button.Checked)
+                {
+                    Lanes = 4;
+                }
+                xmlreader(); //Get tracebuffer data from xml file
+                int vc = getvc();
+                int states = 0;
+                if (vc == 0)
+                {
+                    error = "No Virtual Channel Selected";
+                    errorflag = true;
+                    Runerror err = new Runerror(error);
+                    err.Show();
+                }
+                else
+                {
+                    states = (int)m_IProbe.GetNumberOfStates(vc);
+                }
+                if (states == 0)
+                {
+                    error = "No states found. Check Protocol or Probe Manager or Virtual Channel or Filepath";
+                    errorflag = true;
+                    Runerror err = new Runerror(error);
+                    err.Show();
+                }
+                if (errorflag == false)
+                {
+                    this.toolStripProgressBar1.Maximum = states;
+                    this.toolStripStatusLabel1.Text = "Counting Frames";
+                    this.statusStrip1.Update();
+                    enable(false);
+                    richTextBox1.Text = "";
+                    ComparePanel.Controls.Clear();
+                    getframes();
+                }
             }
             else
             {
-                this.progressBar1.Maximum = (int)WidthnumericUpDown.Value * (int)HeightnumericUpDown.Value;
+                error = "ProbeManager closed, must be open when using this application";
+                Runerror err = new Runerror(error);
+                err.Show();
             }
-            if (Format == "RGB" || Format == "YCbCr444")
+        }
+        /// <summary>
+        /// Fills richtextbox with data about frame
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void getstatesButton_Click(object sender, EventArgs e)
+        {
+            foreach (Control control in FramesPanel.Controls)
             {
-                getpixeldata(lane, Width);
+                if (control is CheckBox)
+                {
+                    Metadata data = (Metadata)control.Tag;
+                    string text = data.Frameid + " StartState: " + (data.StartState - data.StatesBeforeTrig).ToString() + " EndState: " + (data.EndState - data.StatesBeforeTrig).ToString() + "First Pixel: " + (data.FirstPixelState - data.StatesBeforeTrig).ToString() + "\n";
+                    richTextBox1.AppendText(text); 
+                }
             }
-            if (Format == "YCbCr422")
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private async void getframes()
+        {
+            FramesPanel.Controls.Clear(); //Clear all frames previously collected
+            foreach (PictureRenderer pic in pictures) //If frames had PictureRenderers open, close them
             {
-                getpixeldataYCbCr422(lane, Width);
+                pic.Close();
             }
-            if (Format == "YCbCr420")
+            pictures.Clear();
+
+            // create the cancellatin token
+            m_tokenSource = new CancellationTokenSource();
+            m_token = m_tokenSource.Token;
+
+            //From Audio Renderer Code
+            Task<List<Metadata> >[] tasks = new Task<List<Metadata> >[1];
+            ThreadLocal<GetAudioDataStateObject> tls = new ThreadLocal<GetAudioDataStateObject>();
+
+            tasks[0] = new Task<List< Metadata> >((stateObject) => {
+                tls.Value = (GetAudioDataStateObject)stateObject;
+                ((GetAudioDataStateObject)tls.Value).Token.ThrowIfCancellationRequested();
+                return dowork(0,0,tls.Value.Token);
+            }, new GetAudioDataStateObject(m_token));
+
+            foreach (Task t in tasks)
+                t.Start();
+
+            await Task.WhenAll(tasks); //Code below not run until Task complete
+
+            List<Metadata> metadata = tasks[0].Result; //Get metadata saved to Task from dowork.
+            foreach(Metadata data in metadata) //For each metadata object, create new frame and checkbox associated with that frame.
             {
-                getpixeldataYCbCr420(lane, Width);
+                CheckBox check = new CheckBox();
+                data.StatesBeforeTrig = StatesBeforeTrigger;
+                check.Tag = data;
+                if (data.HDCP == true)
+                {
+                    check.Text = "Frame: " + data.Frameid.ToString();
+                }
+                else
+                {
+                    check.Text = "Frame: " + data.Frameid.ToString() + " HDCP Enabled";
+                    check.ForeColor = System.Drawing.Color.Red;
+                }
+                check.Enabled = false;
+                check.CheckedChanged += new EventHandler(FrameCheckBoxChecked);
+                FramesPanel.Controls.Add(check);
+            }
+            enable(true);
+            if (FramesPanel.Controls.Count == 0) //No frames found
+            {
+                string error = "No Frames Found or Cancel Button Pushed";
+                Runerror err = new Runerror(error);
+                err.Show();
+            }
+
+            this.Invoke(new Action(() =>
+            {
+                this.toolStripStatusLabel1.Text = "Ready";
+                this.statusStrip1.Update();
+            }));
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ComparePanel.Controls.Count; i++)
+            {
+                CheckBox check = ((CheckBox)ComparePanel.Controls[i]);
+                if (check.Checked == true)
+                {
+                    ComparePanel.Controls.Remove(check);
+                    i -= 1;
+                }
+            }
+        }
+        private void TestChecked_Click(object sender, EventArgs e)
+        {
+            foreach (Control control in ComparePanel.Controls)
+            {
+                List<PixelData> pic1 = null;
+                string pic1frame = "";
+                CheckBox check = ((CheckBox)control);
+                if (check.Checked == true)
+                {
+                    pic1 = (List<PixelData>)check.Tag;
+                    pic1frame = check.Text;
+                    foreach (PixelData pixel in pic1)
+                    {
+                        if (pixel.XLocation == 0 || pixel.YLocation == 0)
+                        {
+                            string text = "Frame " + check.Text + "X and Y Location (" + pixel.XLocation.ToString() + "," + pixel.YLocation.ToString() + ") PixelStart: " + pixel.StartState + " PixelEnd: " + pixel.EndState + "\n";
+                            richTextBox1.AppendText(text);
+                        }
+                        if (pixel.XLocation == 1919)
+                        {
+                            string text = "Frame " + check.Text + "X and Y Location (" + pixel.XLocation.ToString() + "," + pixel.YLocation.ToString() + ") PixelStart: " + pixel.StartState + " PixelEnd: " + pixel.EndState + "\n";
+                            richTextBox1.AppendText(text);
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Load a picture from outside file to test data files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LoadReferenceButton_Click(object sender, EventArgs e)
+        {
+            bool add = true;
+            foreach (Control control in ComparePanel.Controls)
+            {
+                if (control.Font.Bold)
+                {
+                    string err = "Already a Reference Frame Set";
+                    Runerror error = new Runerror(err);
+                    error.Show();
+                    add = false;
+                    break;
+                }
+            }
+            if (add == true)
+            {
+                List<PixelData> pixels = new List<PixelData>();
+                OpenFileDialog folderDialog = new OpenFileDialog();
+
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var bmp1 = Image.FromFile(folderDialog.FileName);
+                    bmp1 = new Bitmap(folderDialog.FileName);
+                    for (int h = 0; h < ((Bitmap)bmp1).Height; h++)
+                    {
+                        for (int w = 0; w < ((Bitmap)bmp1).Width; w++)
+                        {
+                            Color c = ((Bitmap)bmp1).GetPixel(w, h);
+                            PixelData pixel = new PixelData(h, w, 0, 0, c.R, c.G, c.B, true);
+                            pixels.Add(pixel);
+                        }
+                    }
+
+                }
+
+                CheckBox check = new CheckBox();
+                check.Text = "Reference Frame";
+                check.Font = new Font(DefaultFont.FontFamily, DefaultFont.Size, FontStyle.Bold);
+                check.Tag = pixels;
+                ComparePanel.Controls.Add(check);
+            }
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+        }
+
+        private void ComparePicturesButton_Click(object sender, EventArgs e)
+        {
+            int checkedboxes = 0;
+            bool error = false;
+            List<PixelData> pic1 = null;
+            string pic1frame = "";
+            List<PixelData> pic2 = null;
+            string pic2frame = "";
+            if (ComparePanel.Controls.Count < 2)
+            {
+                error = true;
+            }
+            else
+            {
+                foreach (Control control in ComparePanel.Controls)
+                {
+                    CheckBox check = ((CheckBox)control);
+                    if (check.Checked == true)
+                    {
+                        checkedboxes += 1;
+                        if (checkedboxes == 1)
+                        {
+                            pic1 = (List<PixelData>)check.Tag;
+                            pic1frame = check.Text;
+                        }
+                        else if (checkedboxes == 2)
+                        {
+                            pic2 = (List<PixelData>)check.Tag;
+                            pic2frame = check.Text;
+                        }
+                    }
+                }
+            }
+            if (checkedboxes != 2)
+            {
+                string err = "Must Have Exactly 2 Pictures Checked";
+                Runerror errorform = new Runerror(err);
+                errorform.Show();
+                error = true;
+            }
+            else
+            {
+                if (pic1.Count != pic2.Count)
+                {
+                    string err = "Pictures Have Different Number of Pixels";
+                    Runerror errorform = new Runerror(err);
+                    errorform.Show();
+                    error = true;
+                }
+            }
+            if (error != true)
+            {
+                int iterator = 0;
+                StringBuilder tableRtf = new StringBuilder();
+                //beginning of rich text format,dont customize this begining line              
+                tableRtf.Append(@"{\rtf1 ");
+                for (int i = 0; i < 1; i++)
+                {
+
+                    tableRtf.Append(@"\trowd");
+
+                    //A cell with width 1000.
+                    tableRtf.Append(@"\cellx1800");
+
+                    //Another cell with width 2000.end point is 3000 (which is 1000+2000).
+                    tableRtf.Append(@"\cellx2600");
+
+                    //Another cell with width 1000.end point is 4000 (which is 3000+1000)
+                    tableRtf.Append(@"\cellx3400");
+
+                    //Another cell with width 1000.end point is 4000 (which is 3000+1000)
+                    tableRtf.Append(@"\cellx4000");
+                    tableRtf.Append(@"\cellx4600");
+                    tableRtf.Append(@"\cellx5200");
+                    tableRtf.Append(@"\cellx7700");
+
+
+                    tableRtf.Append(@"\intbl Frame# \cell XLocation \cell YLocation \cell RValue \cell GValue \cell BValue \cell State Range of Pixel \cell  \row"); //create row
+
+                }
+
+                tableRtf.Append(@"\pard");
+                bool pixelcompare = true;
+                int maxcount = 0;
+                int pixelmax = 10000;
+                while (iterator != pic1.Count)
+                {
+                    if (maxcount == pixelmax)
+                    {
+                        string err = pixelmax.ToString() + " Different Pixels, Reached Maximum, Compare Ended";
+                        Runerror errorform = new Runerror(err);
+                        errorform.Show();
+                        break;
+                    }
+                    if (pic1[iterator].BValue == pic2[iterator].BValue & pic1[iterator].GValue == pic2[iterator].GValue & pic1[iterator].RValue == pic2[iterator].RValue)
+                    {
+
+                    }
+                    else
+                    {
+                        pixelcompare = false;
+                        for (int i = 0; i < 3; i++)
+                        {
+                            if (i == 0)
+                            {
+                                tableRtf.Append(@"\intbl " + pic1frame + @" \cell " + pic1[iterator].XLocation.ToString() + @" \cell " + pic1[iterator].YLocation.ToString() + @" \cell " + pic1[iterator].RValue.ToString() + @" \cell " + pic1[iterator].GValue.ToString() + @" \cell " + pic1[iterator].BValue.ToString() + @" \cell " + pic1[iterator].StartState.ToString() + " - " + pic1[iterator].EndState.ToString() + @" \cell \row"); //create row
+                            }
+                            else if (i == 1)
+                            {
+                                tableRtf.Append(@"\intbl " + pic2frame + @" \cell " + pic2[iterator].XLocation.ToString() + @" \cell " + pic2[iterator].YLocation.ToString() + @" \cell " + pic2[iterator].RValue.ToString() + @" \cell " + pic2[iterator].GValue.ToString() + @" \cell " + pic2[iterator].BValue.ToString() + @" \cell " + pic2[iterator].StartState.ToString() + " - " + pic2[iterator].EndState.ToString() + @" \cell \row"); //create row
+                            }
+                            else
+                            {
+                                tableRtf.Append(@"\intbl \cell \row"); //create row
+                            }
+
+                        }
+
+                        tableRtf.Append(@"\pard");
+                        maxcount++;
+                        //error = true;
+                        //pic1[iterator].Compare = false;
+                        //pic2[iterator].Compare = false;
+                        //string text = pic1frame + "   X: " + pic1[iterator].XLocation.ToString() + " Y: " + pic1[iterator].YLocation.ToString() + "\n   R: " + pic1[iterator].RValue.ToString() + "\n   G: " + pic1[iterator].GValue.ToString() + "\n   B: " + pic1[iterator].BValue.ToString() + "\n   StateRange: " + pic1[iterator].StartState.ToString() + " - " + pic1[iterator].EndState.ToString() +  "\n";
+                        //richTextBox1.AppendText(text);
+                        //text = pic2frame + "   X: " + pic2[iterator].XLocation.ToString() + " Y: " + pic2[iterator].YLocation.ToString() + "\n   R: " + pic2[iterator].RValue.ToString() + "\n   G: " + pic2[iterator].GValue.ToString() + "\n   B: " + pic2[iterator].BValue.ToString() + "\n   StateRange: " + pic2[iterator].StartState.ToString() + " - " + pic2[iterator].EndState.ToString() + "\n";
+                        //string text = pic1frame + "   X: " + pic1[iterator].XLocation.ToString() + " Y: " + pic1[iterator].YLocation.ToString() + "             " + pic2frame + "   X: " + pic2[iterator].XLocation.ToString() + " Y: " + pic2[iterator].YLocation.ToString(); 
+                    }
+                    iterator++;
+                }
+                tableRtf.Append(@"}");
+
+                this.richTextBox1.Rtf = tableRtf.ToString();
+                if (pixelcompare == true)
+                {
+                    richTextBox1.Text = "";
+                    MessageForm form = new MessageForm("Pictures " + pic1frame + " and " + pic2frame + " Are the Same");
+                    form.Show();
+                }
             }
         }
 
         #endregion // Event Handlers
 
         #region Private Methods
+        /// <summary>
+        /// Gatherframes, run on Task and returning metadata object
+        /// </summary>
+        /// <param name="startstate"></param>
+        /// <param name="frames"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        private List<Metadata> dowork(int startstate, int frames, CancellationToken token)
+        {
+            // check if "Task {0} was cancelled before it got started.",
+            if (token.IsCancellationRequested == true)
+            {
+                token.ThrowIfCancellationRequested();
+            }
+            bool errorflag = false;
+            bool startofframe = false;
+            bool firstpixel = false;
+            bool foundpixel = false;
+            string VBS = "0x4A";
+            string HBE = "0x15";
+            string HMSA = "0x5C";
+            string VMSA = "0x1C";
+            string VBID = "0x49";
+            int stateindex = startstate;
+            int chunkSize = 4096;
+            int vc = getvc();
+            int states = (int)m_IProbe.GetNumberOfStates(vc);
+            List<byte> Statechunk = new List<byte>();
+            int stateDataLength = 16;
+            byte[] stateData = new byte[stateDataLength];
+            int clear = 0;
+            int startofframestate = 0;
+            int firstpixelstate = 0;
+            List<Metadata> data = new List<Metadata>();
+            List<List<byte>> MSAdata = new List<List<byte>>();
+            MSAData MSAObject = null;
+            StatesBeforeTrigger = 0; //In case the user selects getframes multiple times and changes file
+            bool HDCP = false;
+            if (errorflag == false)
+            {
+                for (; stateindex < states; stateindex += chunkSize)
+                {
+                    Statechunk = m_IProbe.GetStateDataChunk((int)stateindex, 4096, vc); //Get statechunk from statelisting
+                    chunkSize = Statechunk.Count / stateDataLength; //Get size of chunk.
+                    if (chunkSize > 0) //Should only be zero if no states left in listing.
+                    {
+                        for (int chunkIndex = 0; (chunkIndex < chunkSize) && (stateindex + chunkIndex) < states; chunkIndex += 1) //Search through current statechunk
+                        {
+                            getStateDataFromChunk(chunkIndex * 16, Statechunk, ref stateData); 
+                            StringBuilder sb = Geteventcode(stateData); 
+                            String eventcode = sb.ToString();
+                            if (StatesBeforeTrigger == 0)
+                            {
+                                if (IsTrigger(stateData) == true)
+                                {
+                                    StatesBeforeTrigger = stateindex + chunkIndex;
+                                }
+                            }
+                            if (eventcode == VBID)
+                            {
+                                HDCP = false;
+                                HDCP = checkHDCP(stateData);
+                                
+                            }
+                            if (eventcode == HMSA || eventcode == VMSA)
+                            {
+                                if (startofframe == false)
+                                {
+                                    startofframe = true;
+                                    startofframestate = stateindex + chunkIndex;
+                                }
+                                List<byte> lanedata = Getlanedata(stateData);
+                                MSAdata.Add(lanedata);
+                                if (Lanes == 4 & MSAdata.Count == 12)
+                                {
+                                    MSAObject = createMSADataObject(Lanes, MSAdata);
+                                }
+                                else if (Lanes == 2 & MSAdata.Count == 21)
+                                {
+                                    MSAObject = createMSADataObject(Lanes, MSAdata);
+                                }
+                                else if (Lanes == 1 & MSAdata.Count == 39)
+                                {
+                                    MSAObject = createMSADataObject(Lanes, MSAdata);
+                                }
+                            }
+                            else if (eventcode == HBE && startofframe == true) //First PixelState of frame
+                            {
+                                firstpixel = true;
+                                if (foundpixel == false)
+                                {
+                                    firstpixelstate = stateindex + chunkIndex + 1;
+                                    foundpixel = true;
+                                }
+                            }
+                            else if (eventcode == VBS && startofframe == true && firstpixel == true) //Found VBS, frame complete. 
+                            {
+                                //capturedframe
+                                startofframe = false;
+                                firstpixel = false;
+                                foundpixel = false;
+                                frames += 1;
+                                int endstate = stateindex + chunkIndex;
+                                Metadata meta = new Metadata(frames, startofframestate, firstpixelstate, endstate, Lanes, Protocol, vc, DataFolderPath_TextBox.Text, 0, MSAObject, HDCP);
+                                data.Add(meta); //Add meta data to list.
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errorflag = true;
+                    }
+                    Statechunk.Clear(); //Clear statechunk, get next statechunk
+                    if (token.IsCancellationRequested) //If cancel pushed, get out of task, clear data.
+                    {
+                        data.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        clear += 1;
+                        if (clear == 8) //counter to increment, limiting times switching between threads
+                        {
+                            this.Invoke(new Action(() =>
+                            {
+                                this.toolStripProgressBar1.Increment(chunkSize * 8);
+                                this.statusStrip1.Update();
+                            }));
+                            clear = 0;
+                        }
+                    }
+                }
+            }
+            this.Invoke(new Action(() =>
+            {
+                this.toolStripStatusLabel1.Text = "Done";
+                this.toolStripProgressBar1.Value = 0; ;
+                this.statusStrip1.Update();
+            }));
 
+            return data;
+            //this.toolStripProgressBar1.Maximum = 0;
+        }
+
+        private bool checkHDCP(byte[] data)
+        {
+            byte mask = 0x20;
+            List<byte> lanedata = new List<byte>();
+            lanedata = Getlanedata(data);
+            byte VBID = (byte)(lanedata[0] & mask);
+            if (VBID != 0x00)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+       
+        private MSAData createMSADataObject(int lanes, List<List<byte> > data)
+        {
+            int height = 0;
+            int width = 0;
+            int component = 0;
+            int MISC0 = 0;
+            int formatbyte = 0;
+            string format = "";
+            if (lanes == 4)
+            {
+                width = data[5][2];
+                width = width << 8;
+                width += data[6][2];
+                height = data[7][2];
+                height = height << 8;
+                height += data[8][2];
+                MISC0 = data[8][3];
+                component = MISC0 & 0xE0;
+                component = getcomponent(component);
+                formatbyte = MISC0 & 0x06;
+                format = getformat(formatbyte);
+            }
+            if (lanes == 2)
+            {
+                height = data[16][0];
+                height = height << 8;
+                height += data[17][0];
+                width = data[14][0];
+                width = width << 8;
+                width += data[15][0];
+                MISC0 = data[17][1];
+                component = MISC0 & 0xE0;
+                component = getcomponent(component);
+                formatbyte = MISC0 & 0x06;
+                format = getformat(formatbyte);
+            }
+            if (lanes == 1)
+            {
+                height = data[26][0];
+                height = height << 8;
+                height += data[27][0];
+                width = data[24][0];
+                width = width << 8;
+                width += data[25][0];
+                MISC0 = data[36][0];
+                component = MISC0 & 0xE0;
+                component = getcomponent(component);
+                formatbyte = MISC0 & 0x06;
+                format = getformat(formatbyte);
+            }
+            MSAData MSAObject = new MSAData(format, component, width, height);
+            return MSAObject;
+        }
+
+        private int getcomponent(int comp)
+        {
+            if (comp == 0x00)
+            {
+                comp = 18;
+            }
+            else if (comp == 0x20)
+            {
+                comp = 24;
+            }
+            else if (comp == 0x40)
+            {
+                comp = 30;
+            }
+            else if (comp == 0x60)
+            {
+                comp = 36;
+            }
+            else if (comp == 0x80)
+            {
+                comp = 48;
+            }
+            return comp;
+        }
+
+        private string getformat(int bits)
+        {
+            string format = "";
+            if (bits == 0x00)
+            {
+                format = "RGB";
+            }
+            else if (bits == 0x02)
+            {
+                format = "YCbCr422";
+            }
+            else if (bits == 0x04)
+            {
+                format = "YCbCr444";
+            }
+            return format;
+        }
+        /// <summary>
+        /// Either enable or disable controls in mainform.
+        /// </summary>
+        /// <param name="flag"></param>
+        private void enable(bool flag)
+        {
+            groupBox1.Enabled = flag;
+            groupBox3.Enabled = flag;
+            panel2.Enabled = flag;
+            Browsebutton.Enabled = flag;
+            DataFolderPath_TextBox.Enabled = flag;
+            GetFramesbutton.Enabled = flag;
+            foreach (Control control in FramesPanel.Controls)
+            {
+                control.Enabled = flag;
+            }
+            getstatesButton.Enabled = flag;
+            richTextBox1.Enabled = flag;
+        }
+       
         /// <summary>
         /// Create the class library and initialize the interface variable
         /// </summary>
@@ -350,30 +1042,33 @@ namespace PixelRenderer
         {
             string protocol = getprotocol();
             bool status = true;
+            //string path = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"FuturePlus");
+            string path = DataFolderPath_TextBox.Text;
+
             switch (protocol)
             {
                 case "SST-1.2":
                     if (m_DP12SSTProbe != null)
                         m_DP12SSTProbe = null;
-                    m_DP12SSTProbe = new DP12SST();
+                    m_DP12SSTProbe = new DP12SST(path);
                     m_IProbe = (IProbeMgrGen2)m_DP12SSTProbe;
                     break;
                 case "MST-1.2":
                     if (m_DP12MSTProbe != null)
                         m_DP12MSTProbe = null;
-                    m_DP12MSTProbe = new DP12MST();
+                    m_DP12MSTProbe = new DP12MST(path);
                     m_IProbe = (IProbeMgrGen2)m_DP12MSTProbe;
                     break;
                 case "SST-1.4":
                     if (m_DP14SSTProbe != null)
                         m_DP14SSTProbe = null;
-                    m_DP14SSTProbe = new DP14SST();
+                    m_DP14SSTProbe = new DP14SST(path);
                     m_IProbe = (IProbeMgrGen2)m_DP14SSTProbe;
                     break;
                 case "MST-1.4":
                     if (m_DP14MSTProbe != null)
                         m_DP14MSTProbe = null;
-                    m_DP14MSTProbe = new DP14MST();
+                    m_DP14MSTProbe = new DP14MST(path);
                     m_IProbe = (IProbeMgrGen2)m_DP14MSTProbe;
                     break;
             }
@@ -450,11 +1145,9 @@ namespace PixelRenderer
         /// </summary>
         private void DefaultSetup()
         {
-            RGBbutton.Checked = true;
-            RGB24button.Checked = true;
-            YCbCr422groupbox.Enabled = false;
-            YCbCr420groupbox.Enabled = false;
             Lane1button.Checked = true;
+            DataFolderPath_TextBox.Text = m_defaultFolderPath;
+            getstatesButton.Enabled = false;
         }
 
         /// <summary>
@@ -501,137 +1194,9 @@ namespace PixelRenderer
             }
             return vc;
         }
-
         /// <summary>
-        /// Returns the pixel format being used.
+        /// Get Event code startbit and width in tracebuffer using xml file.
         /// </summary>
-        /// <returns></returns>
-        private string getformat()
-        {
-            string format = "";
-            if (RGBbutton.Checked)
-                format = "RGB";
-            else if (YCbCr444button.Checked)
-                format = "YCbCr444";
-            else if (YCbCr422button.Checked)
-                format = "YCbCr422";
-            else if (YCbCr420button.Checked)
-                format = "YCbCr420";
-            return format;
-        }
-
-        /// <summary>
-        /// This will check if a frame can be found in the file, will return true if found, false if not. 
-        /// Will also increment the state number
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="i"></param>
-        /// <param name="vc"></param>
-        /// <returns></returns>
-        private bool checkforframe(ref int i, int vc)
-        {
-            string VBS = "0x4A";
-            string HBE = "0x15";
-            string VBE = "0x55";
-            int flag = 0;
-            bool check = false;
-            long states = m_IProbe.GetNumberOfStates(vc);
-            while (i < states)
-            {
-                StringBuilder sb = Geteventcode(m_IProbe.GetStateData(vc, i));
-                if (sb.ToString() == VBS && flag == 0) //Vertical Blanking Start
-                {
-                    flag = 1;
-                }
-                if (flag == 1) //After Blanking Start was found
-                {
-                    if (sb.ToString() == HBE || sb.ToString() == VBE) //Horizontal Blanking End or Vertical
-                    {
-                        check = true;
-                        i++;
-                        break;
-                    }
-                }
-                i++;
-            }
-            if (check != true)
-            {
-                string s = "Frame not found";
-                Runerror error = new Runerror(s);
-                error.Show();
-            }
-            return check;
-        }
-
-        /// <summary>
-        /// Converts YCbCr components into RGB to place in Bitmap
-        /// </summary>
-        /// <param name="bmp"></param>
-        /// <param name="y"></param>
-        /// <param name="cb"></param>
-        /// <param name="cr"></param>
-        /// <param name="w"></param>
-        /// <param name="h"></param>
-        private void YCbCr_to_RGB(ref Bitmap bmp, int y, int cb, int cr, int w, int h)
-        {
-            double r = (y + 1.4 * (cr - 128));
-            if (r < 0)
-                r = 0;
-            if (r > 255)
-                r = 255;
-            double g = (y - .343 * (cb - 128) - 0.711 * (cr - 128));
-            if (g < 0)
-                g = 0;
-            if (g > 255)
-                g = 255;
-            double b = (y + 1.765 * (cb - 0x80));
-            if (b < 0)
-                b = 0;
-            if (b > 255)
-                b = 255;
-
-            if (w != (int)(WidthnumericUpDown.Value))
-            {
-                bmp.SetPixel(w, h, Color.FromArgb(Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b)));
-            }
-        }
-
-        /// <summary>
-        /// Get width of the pixel
-        /// </summary>
-        /// <returns></returns>
-        private int getpixelwidth()
-        {
-            int width = 0;
-            if (RGB18button.Checked)
-                width = 18;
-            else if (RGB24button.Checked)
-                width = 24;
-            else if (RGB30button.Checked)
-                width = 30;
-            else if (RGB36button.Checked)
-                width = 36;
-            else if (RGB48button.Checked)
-                width = 48;
-            else if (YCbCr16button.Checked)
-                width = 16;
-            else if (YCbCr20button.Checked)
-                width = 20;
-            else if (YCbCr24button.Checked)
-                width = 24;
-            else if (YCbCr32button.Checked)
-                width = 32;
-            else if (YCbCr12button.Checked)
-                width = 12;
-            else if (YCbCr15button.Checked)
-                width = 15;
-            else if (YCbCr18button.Checked)
-                width = 18;
-            else if (YCbCr420_24button.Checked)
-                width = 24;
-            return width;
-        }
-
         private void xmlreader()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -647,6 +1212,11 @@ namespace PixelRenderer
                         EventWidth = Convert.ToInt32(reader.GetAttribute("Width"));
                         string decoy = reader.GetAttribute("StartBit");
                         Eventsb = Convert.ToInt32(decoy);
+                    }
+                    if (reader.GetAttribute("Name") == "Trigger")
+                    {
+                        TriggerWidth = Convert.ToInt32(reader.GetAttribute("Width"));
+                        Triggersb = Convert.ToInt32(reader.GetAttribute("StartBit"));
                     }
                     if (reader.GetAttribute("Name") == "Lane0")
                     {
@@ -688,7 +1258,6 @@ namespace PixelRenderer
             return null;
         }
 
-
         /// <summary>
         /// Extracting the lane data from an inputed lane with help from xml file
         /// </summary>
@@ -729,879 +1298,124 @@ namespace PixelRenderer
             return result;
         }
 
+        private bool IsTrigger(byte[] dataBytes)
+        {
+            byte bits = dataBytes[(15 - (Triggersb / 8))];
+            int bit = Triggersb % 8;
+            byte mask = 0;
+            if (bit == 0)
+            {
+                mask = 0x01;
+            }
+            else if (bit == 1)
+            {
+                mask = 0x02;
+            }
+            else if (bit == 2)
+            {
+                mask = 0x04;
+            }
+            else if (bit == 3)
+            {
+                mask = 0x08;
+            }
+            else if (bit == 4)
+            {
+                mask = 0x10;
+            }
+            else if (bit == 5)
+            {
+                mask = 0x20;
+            }
+            else if (bit == 6)
+            {
+                mask = 0x40;
+            }
+            else if (bit == 7)
+            {
+                mask = 0x80;
+            }
+            bits = (byte)(bits & mask);
+            if (bits == 0x00)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         /// <summary>
-        /// Returns a mask for the length of the byte
+        /// Get statedata from chunk and return
         /// </summary>
-        /// <param name="n"></param>
+        /// <param name="index"></param>
+        /// <param name="statesChunk"></param>
+        /// <param name="stateData"></param>
         /// <returns></returns>
-        private long getmask(int n)
+        private byte[] getStateDataFromChunk(int index, List<byte> statesChunk, ref byte[] stateData)
         {
-            long mask = 0;
-            switch (n)
-            {
-                case 18:
-                    mask = Convert.ToInt64(0x3FFFF);
-                    break;
-                case 20:
-                    mask = Convert.ToInt64(0xFFFFF);
-                    break;
-                case 24:
-                    mask = Convert.ToInt64(0xFFFFFF);
-                    break;
-                case 30:
-                    mask = Convert.ToInt64(0x3FFFFFFF);
-                    break;
-                case 36:
-                    mask = Convert.ToInt64(0xFFFFFFFFF);
-                    break;
-                case 48:
-                    mask = Convert.ToInt64(0xFFFFFFFFFFFF);
-                    break;
-                default:
-                    break;
-            }
-            return mask;
-        }
 
-        /// <summary>
-        /// Returns the masks for YCbCr for a component, example width of 16 means 8 bit components, mask will be 8.
-        /// </summary>
-        /// <returns></returns>
-        private int getbitmaskYCbCr()
-        {
-            int mask = 0;
-            if (YCbCr16button.Checked)
-                mask = 0xFF;
-            else if (YCbCr20button.Checked)
-                mask = 0x3FF;
-            else if (YCbCr24button.Checked)
-                mask = 0xFFF;
-            else if (YCbCr32button.Checked)
-                mask = 0xFFFF;
-            return mask;
-        }
+            for (int i = 0; i < stateData.Length; i++)
+                stateData[i] = statesChunk[index + i];
 
-        /// <summary>
-        /// Returns the component masks for RGB formats
-        /// </summary>
-        /// <param name="n"></param>
-        /// <returns></returns>
-        private int getbitmask(int n)
-        {
-            int mask = 0;
-            switch (n)
-            {
-                case 18:
-                    mask = Convert.ToInt32(0x3F);
-                    break;
-                case 24:
-                    mask = Convert.ToInt32(0xFF);
-                    break;
-                case 30:
-                    mask = Convert.ToInt32(0x3FF);
-                    break;
-                case 36:
-                    mask = Convert.ToInt32(0xFFF);
-                    break;
-                case 48:
-                    mask = Convert.ToInt32(0xFFFF);
-                    break;
-                default:
-                    break;
-            }
-            return mask;
-        }
-
-        /// <summary>
-        /// Creates a pixel with help from the Getlanedata function
-        /// </summary>
-        /// <param name="dataBytes"></param>
-        /// <param name="width"></param>
-        /// <returns name = "ulong"> </returns>
-        private void createpixel(ref Bitmap bmp, List<byte[]> pixeldata, int width, int state, int lanes, int remander, ref int w, int h)
-        {
-            int decoywid = width; //Keep track of original width
-            ulong pixel1 = 0; //The pixel
-            ulong pixel2 = 0; //The pixel
-            ulong pixel3 = 0; //The pixel
-            ulong pixel4 = 0; //The pixel
-            int component = width / 3;
-            List<byte> comp = new List<byte>();
-            double bytes = Math.Ceiling(width / 8.00); //Number of bytes that will be required
-            int bits = Convert.ToInt32(((bytes - 1) * 8)); //Number of bits - 8, this is used for shifting.
-            if (pixeldata.Count - state == 5 && decoywid == 30) //Weird case where the 30 bit width requires 5 bytes instead of the usual 4. 
-            {
-                bits += 8;
-                width += 8;
-            }
-            while (width > 0)
-            {
-                width = width - 8;
-                comp = Getlanedata(pixeldata[state]);
-                if (bits == 0)
-                {
-                    pixel1 |= comp[0];
-                    pixel2 |= comp[1];
-                    pixel3 |= comp[2];
-                    pixel4 |= comp[3];
-                    pixel1 = pixel1 >> remander;
-                    pixel1 = pixel1 & (ulong)Mask;
-                    pixel2 = pixel2 >> remander;
-                    pixel2 = pixel2 & (ulong)Mask;
-                    pixel3 = pixel3 >> remander;
-                    pixel3 = pixel3 & (ulong)Mask;
-                    pixel4 = pixel4 >> remander;
-                    pixel4 = pixel4 & (ulong)Mask;
-                }
-                else
-                {
-                    pixel1 |= (ulong)(Convert.ToInt64(comp[0]) << bits); //Error where the bits were not shifting when bits == 32. Converted comp to long to fix error.
-                    pixel2 |= (ulong)(Convert.ToInt64(comp[1]) << bits);
-                    pixel3 |= (ulong)(Convert.ToInt64(comp[2]) << bits);
-                    pixel4 |= (ulong)(Convert.ToInt64(comp[3]) << bits);
-                    state++;
-                    bits -= 8;
-                }
-            }
-            if (lanes == 4)
-            {
-                placepixel(pixel1, ref bmp, ref w, h);
-                placepixel(pixel2, ref bmp, ref w, h);
-                placepixel(pixel3, ref bmp, ref w, h);
-                placepixel(pixel4, ref bmp, ref w, h);
-            }
-            else if (lanes == 2)
-            {
-                placepixel(pixel1, ref bmp, ref w, h);
-                placepixel(pixel2, ref bmp, ref w, h);
-            }
-            else if (lanes == 1)
-            {
-                placepixel(pixel1, ref bmp, ref w, h);
-            }
-        }
-        /// <summary>
-        /// Create pixel list for YCbCr formats
-        /// </summary>
-        /// <param name="pixeldata"></param>
-        /// <param name="width"></param>
-        /// <param name="state"></param>
-        /// <param name="lanes"></param>
-        /// <param name="remander"></param>
-        /// <returns></returns>
-        private void createpixels(ref Bitmap bmp, List<byte[]> pixeldata, int width, int state, int lanes, int remander, ref int w, ref int h)
-        {
-            ulong pixel1 = 0;
-            ulong pixel = 0;
-            List<byte> statedata = new List<byte>();
-            int i = 0;
-            int k = 0;
-            int originalwidth = width;
-            ulong mask = 0xFFFFFFFFFFFFFFFF;
-            bool flag = true;
-            if (lanes > 1)
-            {
-                k = 1;
-                if (lanes == 4) //there are four pixels, we need to loop again. Explained later
-                {
-                    flag = false;
-                }
-            }
-            if (width == 20) //Weird case
-            {
-                mask = 0xFFFFF;
-                width = 24;
-            }
-            int lane = 0;
-            loop:
-            while (width > 0)
-            {
-                statedata = Getlanedata(pixeldata[state + i]);
-                pixel |= (uint)(statedata[lane] << (width - 8));
-                width -= 8;
-                i++;
-                if (width <= 0 && k == 1) //after the Y and Cb in the first are extracted, save it in pixel1 and switch lanes. Set Width back to origanal
-                {
-                    width = originalwidth;
-                    lane++;
-                    i = 0;
-                    k++;
-                    pixel1 = (ulong)pixel;
-                    if (remander != 0)
-                    {
-                        pixel1 = pixel1 >> remander;
-                    }
-                    pixel1 = pixel1 & mask;
-                    pixel = 0;
-                }
-            }
-            if (remander != 0)
-            {
-                pixel = pixel >> remander;
-            }
-            pixel |= (ulong)pixel1 << originalwidth; //add pixel1 to the the pixel so that all Y, Cb, Cr, and Y1 components are together.
-            if (w == (int)WidthnumericUpDown.Value)
-            {
-                string e = "More pixels remain for line, width to small";
-                Runerror error = new Runerror(e);
-                error.Show();
-                flag = true;
-            }
-            placepixel(pixel, ref bmp, ref w, h); //Place pixel
-            if (flag == false) //If lanes is 4, Go back and loop again and set the other pixel. Flag will be set to true so that next time this will be skipped over.
-            {
-                lane++;
-                width = originalwidth;
-                flag = true;
-                pixel = 0;
-                pixel1 = 0;
-                i = 0;
-                k = 1;
-                goto loop;
-            }
-        }
-
-        /// <summary>
-        /// Creating a pixel with YCbCr420 formats
-        /// </summary>
-        /// <param name="bmp"></param>
-        /// <param name="even"></param>
-        /// <param name="odd"></param>
-        /// <param name="width"></param>
-        /// <param name="state"></param>
-        /// <param name="lane"></param>
-        /// <param name="remander"></param>
-        /// <param name="w"></param>
-        /// <param name="h"></param>
-        private void createpixelsYCbCr420(ref Bitmap bmp, List<Byte[]> even, List<Byte[]> odd, int width, int state, int lanes, int remander, ref int w, int h) //Similar to RGB algorithm
-        {
-            int decoywid = width; //Keep track of original width
-            int decoystate = state;
-            ulong pixel1 = 0; //The pixel
-            ulong pixel2 = 0; //The pixel
-            ulong pixel3 = 0; //The pixel
-            ulong pixel4 = 0; //The pixel
-            ulong epixel1 = 0; //The pixel
-            ulong epixel2 = 0; //The pixel
-            ulong epixel3 = 0; //The pixel
-            ulong epixel4 = 0; //The pixel
-            int component = width / 3;
-            List<byte> comp = new List<byte>();
-            double bytes = Math.Ceiling(width / 8.00); //Number of bytes that will be required
-            int bits = Convert.ToInt32(((bytes - 1) * 8)); //Number of bits - 8, this is used for shifting.
-            int flag = 0;
-            loop:
-            while (width > 0)
-            {
-                width = width - 8;
-                if (flag == 0)
-                {
-                    comp = Getlanedata(even[state]);
-                }
-                else
-                {
-                    comp = Getlanedata(odd[state]);
-                }
-                if (bits == 0)
-                {
-                    pixel1 |= (ulong)(comp[0]);
-                    pixel1 = pixel1 >> remander;
-                    //pixel1 = pixel1 & (ulong)Mask;
-                    pixel2 |= (ulong)(comp[1]);
-                    pixel2 = pixel2 >> remander;
-                    //pixel2 = pixel2 & (ulong)Mask;
-                    pixel3 |= (ulong)(comp[2]);
-                    pixel3 = pixel3 >> remander;
-                    //pixel3 = pixel3 & (ulong)Mask;
-                    pixel4 |= (ulong)(comp[3]);
-                    pixel4 = pixel4 >> remander;
-                    //pixel4 = pixel4 & (ulong)Mask;
-                }
-                else
-                {
-                    pixel1 |= (uint)(comp[0] << bits);
-                    pixel2 |= (uint)(comp[1] << bits);
-                    pixel3 |= (uint)(comp[2] << bits);
-                    pixel4 |= (uint)(comp[3] << bits);
-                    state++;
-                    bits -= 8;
-                }
-            }
-            if (flag != 1) // Get data from the other list now
-            {
-                flag = 1;
-                epixel1 = pixel1;
-                epixel2 = pixel2;
-                epixel3 = pixel3;
-                epixel4 = pixel4;
-                pixel1 = 0;
-                pixel2 = 0;
-                pixel3 = 0;
-                pixel4 = 0;
-                width = decoywid;
-                bits = Convert.ToInt32(((bytes - 1) * 8));
-                state = decoystate;
-                goto loop;
-            }
-            if (lanes == 4)
-            {
-                placepixel420(ref bmp, epixel1, pixel1, w, h, decoywid);
-                w += 2;
-                placepixel420(ref bmp, epixel2, pixel2, w, h, decoywid);
-                w += 2;
-                placepixel420(ref bmp, epixel3, pixel3, w, h, decoywid);
-                w += 2;
-                placepixel420(ref bmp, epixel4, pixel4, w, h, decoywid);//pixel = evenpixel, pixel1 = oddpixel 
-                w += 2;
-            }
-            else if (lanes == 2)
-            {
-                placepixel420(ref bmp, epixel1, pixel1, w, h, decoywid);
-                w += 2;
-                placepixel420(ref bmp, epixel2, pixel2, w, h, decoywid);
-                w += 2;
-            }
-            else if (lanes == 1)
-            {
-                placepixel420(ref bmp, epixel1, pixel1, w, h, decoywid);
-                w += 2;
-            }
-        }
-
-        /// <summary>
-        /// Recieves pixel and places pixel in the bitmap for YCbCr420
-        /// </summary>
-        /// <param name="bmp"></param>
-        /// <param name="evenpixel"></param>
-        /// <param name="oddpixel"></param>
-        /// <param name="w"></param>
-        /// <param name="h"></param>
-        /// <param name="width"></param>
-        private void placepixel420(ref Bitmap bmp, ulong evenpixel, ulong oddpixel, int w, int h, int width) //4 pixels are being placed, 2 on current line of bitmap, and 2 on previous.
-        {
-            int component = width / 3;
-            int eY = (int)(evenpixel >> component * 2);
-            eY = eY & getbitmask(width);
-            int eY1 = (int)(evenpixel >> component);
-            eY1 = eY1 & getbitmask(width);
-            int Cb = (int)(evenpixel);
-            Cb = Cb & getbitmask(width);
-
-            int oY = (int)(evenpixel >> component * 2);
-            oY = oY & getbitmask(width);
-            int oY1 = (int)(evenpixel >> component);
-            oY1 = oY1 & getbitmask(width);
-            int Cr = (int)(evenpixel);
-            Cr = Cr & getbitmask(width);
-            if (Width == 20)
-            {
-                eY /= 4;
-                oY /= 4;
-                Cb /= 4;
-                Cr /= 4;
-                eY1 /= 4;
-                oY1 /= 4;
-            }
-
-            else if (Width == 24)
-            {
-                eY /= 16;
-                oY /= 16;
-                Cb /= 16;
-                Cr /= 16;
-                eY1 /= 16;
-                oY1 /= 16;
-            }
-
-            else if (Width == 32)
-            {
-                eY /= 256;
-                oY /= 256;
-                Cb /= 256;
-                Cr /= 256;
-                eY1 /= 256;
-                oY1 /= 256;
-            }
-
-            YCbCr_to_RGB(ref bmp, eY, Cb, Cr, w, h - 1);
-            this.progressBar1.Increment(1);
-            YCbCr_to_RGB(ref bmp, eY1, Cb, Cr, w + 1, h - 1);
-            this.progressBar1.Increment(1);
-            YCbCr_to_RGB(ref bmp, oY, Cb, Cr, w, h);
-            this.progressBar1.Increment(1);
-            YCbCr_to_RGB(ref bmp, oY1, Cb, Cr, w + 1, h);
-            this.progressBar1.Increment(1);
-
-        }
-
-        /// <summary>
-        /// Places pixel in bitmap from RGB, YCbCr444, and YCbCr422 formats
-        /// </summary>
-        /// <param name="pixel"></param>
-        /// <param name="bmp"></param>
-        /// <param name="w"></param>
-        /// <param name="h"></param>
-        private void placepixel(ulong pixel, ref Bitmap bmp, ref int w, int h)
-        {
-            string format = Format;
-            if (format == "RGB")
-            {
-                placeRGB(ref w, ref h, pixel, ref bmp);
-            }
-            else if (format == "YCbCr444")
-            {
-                placeYCbCr444(ref w, ref h, pixel, ref bmp);
-            }
-            else if (format == "YCbCr422")
-            {
-                placeYCbCr422(ref w, ref h, pixel, ref bmp);
-            }
-        }
-
-        private void placeRGB(ref int w, ref int h, ulong pixel, ref Bitmap bmp)
-        {
-            int component = Width / 3;
-            int r = (int)(pixel >> component * 2);
-            r = r & getbitmask(Width);
-            int g = (int)(pixel >> component);
-            g = g & getbitmask(Width);
-            int b = (int)(pixel);
-            b = b & getbitmask(Width);
-            if (Width == 30) //This is to bring RGB widths down to 24
-            {
-                r = r / 4;
-                g = g / 4;
-                b = b / 4;
-            }
-            else if (Width == 36)//This is to bring RGB widths down to 24
-            {
-                r = r / 16;
-                g = g / 16;
-                b = b / 16;
-            }
-            else if (Width == 48)//This is to bring RGB widths down to 24
-            {
-                r = r / 256;
-                g = g / 256;
-                b = b / 256;
-            }
-            if (w != (int)WidthnumericUpDown.Value)
-            {
-                bmp.SetPixel(w, h, Color.FromArgb(r, g, b));
-                w++;
-                this.progressBar1.Increment(1);
-            }
-        }
-        private void placeYCbCr444(ref int w, ref int h, ulong pixel, ref Bitmap bmp)
-        {
-            int component = Width / 3;
-            int Cb = (int)(pixel >> component * 2);
-            Cb = Cb & (int)getbitmask(Width);
-            int Y = (int)(pixel >> component);
-            Y = Y & (int)getbitmask(Width);
-            int Cr = (int)(pixel);
-            Cr = Cr & (int)getbitmask(Width);
-            if (Width == 30) //This is to bring RGB widths down to 24
-            {
-                Cr = Cr / 4;
-                Y = Y / 4;
-                Cb = Cb / 4;
-            }
-            else if (Width == 36)//This is to bring RGB widths down to 24
-            {
-                Cr = Cr / 16;
-                Y = Y / 16;
-                Cb = Cb / 16;
-            }
-            else if (Width == 48)//This is to bring RGB widths down to 24
-            {
-                Cr = Cr / 256;
-                Y = Y / 256;
-                Cb = Cb / 256;
-            }
-            YCbCr_to_RGB(ref bmp, Y, Cb, Cr, w, h);
-            w++;
-            this.progressBar1.Increment(1);
-        }
-        private void placeYCbCr422(ref int w, ref int h, ulong pixel, ref Bitmap bmp)
-        {
-            int component = Width / 2;
-            int mask = getbitmaskYCbCr();
-            int Cb = (int)(pixel >> component * 3);
-            Cb = Cb & mask;
-            int Y = (int)(pixel >> component * 2);
-            Y = Y & mask;
-            int Cr = (int)(pixel >> component);
-            Cr = Cr & mask;
-            int Y1 = (int)pixel;
-            Y1 = Y1 & mask;
-
-            if (Width == 20)
-            {
-                Y /= 4;
-                Cb /= 4;
-                Cr /= 4;
-                Y1 /= 4;
-            }
-
-            else if (Width == 24)
-            {
-                Y /= 16;
-                Cb /= 16;
-                Cr /= 16;
-                Y1 /= 16;
-            }
-
-            else if (Width == 32)
-            {
-                Y /= 256;
-                Cb /= 256;
-                Cr /= 256;
-                Y1 /= 256;
-            }
-
-            YCbCr_to_RGB(ref bmp, Y, Cb, Cr, w, h);
-            w++;
-            this.progressBar1.Increment(1);
-            YCbCr_to_RGB(ref bmp, Y1, Cb, Cr, w, h);
-            w++;
-            this.progressBar1.Increment(1);
-        }
-        /// <summary>
-        /// Organizing the pixel data for the YCbCr format
-        /// </summary>
-        /// <param name="lanes"></param>
-        /// <param name="width"></param>
-        private void getpixeldataYCbCr422(int lanes, int width) //This is done with same logic as RGB, just different format and the comment below
-        {
-            Bitmap bmp = new Bitmap((int)WidthnumericUpDown.Value, (int)HeightnumericUpDown.Value);
-            string VBS = "0x4A";
-            string HBE = "0x15";
-            int w = 0;
-            int h = 0;
-            if (lanes == 1) //If the width is 16, if there is one lane, the width most be doubled to get Cr and Y1 components.
-                width *= 2;
-            List<byte[]> pixeldata = new List<byte[]>();
-            int vchannel = getvc();
-            int i = (int)StateNumberNumericUpDown.Value;
-            bool check = false;
-            check = checkforframe(ref i, vchannel);
-            bool flag = true;
-            int tracker = 0;
-            byte[] dum = null;
-            int lanewidth = 8;
-            int dummywidth = 0;
-            int count = 0;
-            int states = Convert.ToInt32(m_IProbe.GetNumberOfStates(vchannel));
-            while (i != states)
-            {
-                dum = (m_IProbe.GetStateData(vchannel, i));
-                StringBuilder sb = Geteventcode(dum);
-                if (sb.ToString() == "0x88" || sb.ToString() == "0xC8")
-                {
-                    if (w == (int)WidthnumericUpDown.Value) //If w equals the inputed width, width most be to small
-                    {
-                        string e = "More pixels found, width to small";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                        break;
-                    }
-                    if (h == (int)HeightnumericUpDown.Value)
-                    {
-                        string e = "Not enough lines in frame, height to small";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                        break;
-                    }
-                    if (flag == true)
-                        dummywidth += lanewidth;
-                    else
-                        flag = true;
-                    pixeldata.Add(dum);
-                    tracker++;
-                    count++;
-                    if (dummywidth >= width)
-                    {
-                        if (dummywidth != width)
-                        {
-                            i--;
-                            dummywidth = dummywidth - width;
-                            flag = false;
-                        }
-                        else if (dummywidth == width)
-                            dummywidth = 0;
-                        createpixels(ref bmp, pixeldata, width, (tracker - count), lanes, dummywidth, ref w, ref h);
-                        count = 0;
-                    }
-                }
-                else if (sb.ToString() == HBE) //HBE
-                {
-                    if (w < (int)WidthnumericUpDown.Value)
-                    {
-                        string e = "Width to big, not enough pixels to fill a line";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                        break;
-                    }
-                    h++;
-                    w = 0;
-                }
-                else if (sb.ToString() == VBS) //VBE
-                {
-                    if (h < (HeightnumericUpDown.Value - 1))
-                    {
-                        string e = "Input height to big, more lines than pixels";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                    }
-                    if (h > (HeightnumericUpDown.Value - 1))
-                    {
-                        string e = "Input height to small, not enough lines in the frame, or VBS not in Channel";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                    }
-                    break;
-                }
-                i++;
-            }
-
-            PictureBox.Image = bmp;
-        }
-
-        /// <summary>
-        /// Storing pixel data for YCbCr420, requires two pixel lists
-        /// </summary>
-        /// <param name="lanes"></param>
-        /// <param name="width"></param>
-        private void getpixeldataYCbCr420(int lanes, int width)
-        {
-            Bitmap bmp = new Bitmap((int)WidthnumericUpDown.Value, (int)HeightnumericUpDown.Value);
-            string VBS = "0x4A";
-            string HBE = "0x15";
-            int w = 0;
-            int h = 0;
-            width *= 2;
-            int switchlist = 1;
-            List<byte[]> pixeldata_odd = new List<byte[]>(); //List for the odd lines
-            List<byte[]> pixeldata_even = new List<byte[]>(); //List for the even lines
-            int vchannel = getvc();
-            int i = (int)StateNumberNumericUpDown.Value;
-            bool check = false;
-            check = checkforframe(ref i, vchannel);
-            bool flag = true;
-            int tracker = 0;
-            byte[] dum = null;
-            int states = (int)m_IProbe.GetNumberOfStates(vchannel);
-            int lanewidth = 8;
-            int dummywidth = 0;
-            int count = 0;
-            while (i != states)
-            {
-                if (h % 2 == 0) //Switchlist determines which list the state data will be stored in
-                    switchlist = 0;
-                else
-                    switchlist = 1;
-                dum = (m_IProbe.GetStateData(vchannel, i));
-                StringBuilder sb = Geteventcode(dum);
-                if (sb.ToString() == "0x88" || sb.ToString() == "0xC8")
-                {
-                    if (w == (int)WidthnumericUpDown.Value) //If w equals the inputed width, width most be to small
-                    {
-                        string e = "More pixels found, width to small";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                        break;
-                    }
-                    if (h == (int)HeightnumericUpDown.Value)
-                    {
-                        string e = "Not enough lines in frame, height to small";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                        break;
-                    }
-                    if (flag == true)
-                        dummywidth += lanewidth;
-                    else
-                        flag = true;
-                    if (switchlist == 0)
-                        pixeldata_even.Add(dum);
-                    else
-                        pixeldata_odd.Add(dum);
-                    tracker++;
-                    count++;
-                    if (dummywidth >= width)
-                    {
-                        if (dummywidth != width)
-                        {
-                            i--;
-                            dummywidth = dummywidth - width;
-                            flag = false;
-                        }
-                        else if (dummywidth == width)
-                            dummywidth = 0;
-                        if (h % 2 == 1) //The even list must be complete, so pixels will only be placed when the odd list is being put together.
-                        {
-                            if (w != (int)WidthnumericUpDown.Value)
-                                createpixelsYCbCr420(ref bmp, pixeldata_even, pixeldata_odd, width, (tracker - count), lanes, dummywidth, ref w, h);
-                        }
-                        count = 0;
-                    }
-                }
-                else if (sb.ToString() == HBE) //HBE
-                {
-                    if (h % 2 == 1)
-                    {
-                        if (w < (int)WidthnumericUpDown.Value)
-                        {
-                            string e = "Width to big, not enough pixels to fill a line";
-                            Runerror error = new Runerror(e);
-                            error.Show();
-                            break;
-                        }
-                    }
-                    h++;
-                    dummywidth = 0;
-                    count = 0;
-                    tracker = 0;
-                    w = 0;
-                    if (h % 2 == 0)
-                    {
-                        pixeldata_even.Clear();
-                        pixeldata_odd.Clear();
-                    }
-                }
-                if (sb.ToString() == VBS) //VBE
-                {
-                    if (h < (HeightnumericUpDown.Value - 1))
-                    {
-                        string e = "Input height to big, more lines than pixels";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                    }
-                    if (h > (HeightnumericUpDown.Value - 1))
-                    {
-                        string e = "Input height to small, not enough lines in the frame, or VBS not in Channel";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                    }
-                    break;
-                }
-                i++;
-            }
-            PictureBox.Image = bmp;
-        }
-        /// <summary>
-        /// Accquiring the pixel data to create pixels and stores them in a list
-        /// </summary>
-        /// <param name="lanes"></param>
-        /// <param name="width"></param>
-        private void getpixeldata(int lanes, int width)
-        {
-            Bitmap bmp = new Bitmap((int)WidthnumericUpDown.Value, (int)HeightnumericUpDown.Value);
-            string VBS = "0x4A";
-            string HBE = "0x15";
-            int w = 0;
-            int h = 0;
-            List<byte[]> pixeldata = new List<byte[]>();
-            int vchannel = getvc();
-            int component = width / 3;
-            bool flag = true;
-            int i = (int)StateNumberNumericUpDown.Value;
-            bool check = false;
-            check = checkforframe(ref i, vchannel);
-            int tracker = 0;
-            byte[] dum = null;
-            int states = (int)m_IProbe.GetNumberOfStates(vchannel);
-            int lanewidth = 8;
-            int dummywidth = 0; //Adding by 8 each time, this is for a check later in the program.
-            int count = 0; //counts number of states before enough are found for a pixel state
-            while (i != states)
-            {
-                dum = (m_IProbe.GetStateData(vchannel, i));
-                StringBuilder sb = Geteventcode(dum);
-                if (sb.ToString() == "0x88" || sb.ToString() == "0xC8") //If pixel state
-                {
-                    if (w == (int)WidthnumericUpDown.Value) //If w equals the inputed width, width most be to small
-                    {
-                        string e = "Not enough pixel found to make up line, check MSA, width should equal" + w.ToString();
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                        break;
-                    }
-                    if (h == (int)HeightnumericUpDown.Value)
-                    {
-                        string e = "Not enough lines in frame, height to small";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                        PictureBox.Image = bmp;
-                        break;
-                    }
-                    if (flag == true) //Adding bits to dummywidth
-                        dummywidth += lanewidth;
-                    else
-                        flag = true;
-                    pixeldata.Add(dum);
-                    tracker++;
-                    count++;
-                    if (dummywidth >= width)
-                    {
-                        if (dummywidth != width) //if the dummywidth is more than the width, subtract it. Must be kept track for the reminder.
-                        {
-                            i--; //This state is going to be put into the statedata list twice, thats why flag will also be false, so dummywidth is not added a second time
-                            dummywidth = dummywidth - width;
-                            flag = false;
-                        }
-                        else if (dummywidth == width) //No remander, all the bits will be used and not shift will be nessacary
-                            dummywidth = 0;
-                        if (w != (int)WidthnumericUpDown.Value) //In case the enough pixels are placed before the lanes are finished
-                            createpixel(ref bmp, pixeldata, width, (tracker - count), lanes, dummywidth, ref w, h);
-                        count = 0;
-                    }
-                }
-                else if (sb.ToString() == HBE) //If Horizontal Blanking End
-                {
-                    if (w < (int)WidthnumericUpDown.Value) //If w equals the inputed width, width most be to small
-                    {
-                        string e = "All pixels found on line found, check MSA correct width should equal" + w.ToString();
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                        PictureBox.Image = bmp;
-                        break;
-                    }
-                    h++;
-                    w = 0;
-                    tracker = 0;
-                    dummywidth = 0;
-                    pixeldata.Clear();
-                    count = 0;
-                }
-                else if (sb.ToString() == VBS) //If Vertical Blanking Start
-                {
-                    if (h < (HeightnumericUpDown.Value - 1))
-                    {
-                        string e = "Input height to big, more lines than pixels";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                    }
-                    if (h > (HeightnumericUpDown.Value - 1))
-                    {
-                        string e = "Input height to small, not enough lines in the frame, or VBS not in Channel";
-                        Runerror error = new Runerror(e);
-                        error.Show();
-                    }
-                    break;
-                }
-                i++;
-            }
-            PictureBox.Image = bmp;
+            return stateData;
         }
 
 
         #endregion // Private Methods
 
         #region Public Methods
+
         #endregion // Public Methods
 
     }
-}
+    /// <summary>
+    /// Metadata objectclass, public because other forms will use this class.
+    /// </summary>
+    public class Metadata
+    {
+        private int m_lanes = 0;
+        public int Lanes { get { return m_lanes; } set { m_lanes = value; } }
+        private int m_frameid = 0;
+        public int Frameid { get { return m_frameid; } set { m_frameid = value; } }
 
+        private int m_vc = 0;
+        public int VirtualChannel { get { return m_vc; } set { m_vc = value; } }
+
+        private string m_protocol = "";
+        public string Protocol { get { return m_protocol; } set { m_protocol = value; } }
+        private int m_startstate = 0;
+        public int StartState { get { return m_startstate; } set { m_startstate = value; } }
+        private int m_firstpixelstate = 0;
+        public int FirstPixelState { get { return m_firstpixelstate; } set { m_firstpixelstate = value; } }
+        private int m_endstate = 0;
+        public int EndState { get { return m_endstate; } set { m_endstate = value; } }
+        private string m_file = "";
+        public string Pathfile { get { return m_file; } set { m_file = value; } }
+
+        private int m_statesbeforetrig = 0;
+        public int StatesBeforeTrig { get { return m_statesbeforetrig; } set { m_statesbeforetrig = value; } }
+
+        private FrameVideoRendererCtrl.MSAData m_msadata;
+        public FrameVideoRendererCtrl.MSAData MSAData { get { return m_msadata; } set { m_msadata = value; } }
+
+        private bool m_HDCP = false;
+        public bool HDCP { get { return m_HDCP; } set { m_HDCP = value; } }
+
+        public Metadata(int frameid, int start, int firstpixel, int end, int lanes, string protocol, int vc, string file, int statesbeforetrig, FrameVideoRendererCtrl.MSAData msadata, bool hdcp)
+        {
+            Frameid = frameid;
+            StartState = start;
+            FirstPixelState = firstpixel;
+            EndState = end;
+            Lanes = lanes;
+            Protocol = protocol;
+            VirtualChannel = vc;
+            Pathfile = file;
+            StatesBeforeTrig = statesbeforetrig;
+            MSAData = msadata;
+            HDCP = hdcp;
+        }
+    }
+}

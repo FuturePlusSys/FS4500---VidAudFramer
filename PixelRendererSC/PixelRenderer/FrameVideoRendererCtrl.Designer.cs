@@ -1,4 +1,4 @@
-﻿namespace PixelRenderer
+﻿namespace FrameVideoRendererClassLibrary
 {
     partial class FrameVideoRendererCtrl
     {
@@ -28,39 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.WidthnumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.Savebutton = new System.Windows.Forms.Button();
-            this.HeightnumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.Clearbutton = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.paintbutton = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.PictureBox = new System.Windows.Forms.PictureBox();
-            this.NumOfStatesButton = new System.Windows.Forms.Button();
-            this.Linkwidth_groupBox = new System.Windows.Forms.GroupBox();
-            this.YCbCr420groupbox = new System.Windows.Forms.GroupBox();
-            this.YCbCr420_24button = new System.Windows.Forms.RadioButton();
-            this.YCbCr12button = new System.Windows.Forms.RadioButton();
-            this.YCbCr15button = new System.Windows.Forms.RadioButton();
-            this.YCbCr18button = new System.Windows.Forms.RadioButton();
-            this.YCbCr422groupbox = new System.Windows.Forms.GroupBox();
-            this.YCbCr32button = new System.Windows.Forms.RadioButton();
-            this.YCbCr16button = new System.Windows.Forms.RadioButton();
-            this.YCbCr20button = new System.Windows.Forms.RadioButton();
-            this.YCbCr24button = new System.Windows.Forms.RadioButton();
-            this.RGBgroupbox = new System.Windows.Forms.GroupBox();
-            this.RGB36button = new System.Windows.Forms.RadioButton();
-            this.RGB18button = new System.Windows.Forms.RadioButton();
-            this.RGB24button = new System.Windows.Forms.RadioButton();
-            this.RGB30button = new System.Windows.Forms.RadioButton();
-            this.RGB48button = new System.Windows.Forms.RadioButton();
-            this.YCbCr420button = new System.Windows.Forms.RadioButton();
-            this.YCbCr422button = new System.Windows.Forms.RadioButton();
-            this.YCbCr444button = new System.Windows.Forms.RadioButton();
-            this.RGBbutton = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lane4button = new System.Windows.Forms.RadioButton();
             this.Lane2button = new System.Windows.Forms.RadioButton();
@@ -76,398 +43,38 @@
             this.VC3button = new System.Windows.Forms.RadioButton();
             this.VC2button = new System.Windows.Forms.RadioButton();
             this.VC1button = new System.Windows.Forms.RadioButton();
-            this.StateIndexLabel = new System.Windows.Forms.Label();
-            this.StateNumberNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            ((System.ComponentModel.ISupportInitialize)(this.WidthnumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeightnumericUpDown)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
-            this.Linkwidth_groupBox.SuspendLayout();
-            this.YCbCr420groupbox.SuspendLayout();
-            this.YCbCr422groupbox.SuspendLayout();
-            this.RGBgroupbox.SuspendLayout();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.DataFolderPath_TextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Browsebutton = new System.Windows.Forms.Button();
+            this.GetFramesbutton = new System.Windows.Forms.Button();
+            this.FramesPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.getstatesButton = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.ComparePicturesButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.TestChecked = new System.Windows.Forms.Button();
+            this.ClearButton = new System.Windows.Forms.Button();
+            this.LoadReferenceButton = new System.Windows.Forms.Button();
+            this.ComparePanel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.StateNumberNumericUpDown)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // WidthnumericUpDown
-            // 
-            this.WidthnumericUpDown.Location = new System.Drawing.Point(718, 52);
-            this.WidthnumericUpDown.Maximum = new decimal(new int[] {
-            1215752192,
-            23,
-            0,
-            0});
-            this.WidthnumericUpDown.Name = "WidthnumericUpDown";
-            this.WidthnumericUpDown.Size = new System.Drawing.Size(81, 20);
-            this.WidthnumericUpDown.TabIndex = 55;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 153);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 51;
-            this.label1.Text = "Picture";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(718, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 58;
-            this.label4.Text = "Width";
-            // 
-            // Savebutton
-            // 
-            this.Savebutton.Location = new System.Drawing.Point(805, 130);
-            this.Savebutton.Name = "Savebutton";
-            this.Savebutton.Size = new System.Drawing.Size(82, 23);
-            this.Savebutton.TabIndex = 50;
-            this.Savebutton.Text = "Save";
-            this.Savebutton.UseVisualStyleBackColor = true;
-            this.Savebutton.Click += new System.EventHandler(this.Savebutton_Click);
-            // 
-            // HeightnumericUpDown
-            // 
-            this.HeightnumericUpDown.Location = new System.Drawing.Point(718, 95);
-            this.HeightnumericUpDown.Maximum = new decimal(new int[] {
-            1215752192,
-            23,
-            0,
-            0});
-            this.HeightnumericUpDown.Name = "HeightnumericUpDown";
-            this.HeightnumericUpDown.Size = new System.Drawing.Size(81, 20);
-            this.HeightnumericUpDown.TabIndex = 57;
-            // 
-            // Clearbutton
-            // 
-            this.Clearbutton.Location = new System.Drawing.Point(717, 130);
-            this.Clearbutton.Name = "Clearbutton";
-            this.Clearbutton.Size = new System.Drawing.Size(82, 23);
-            this.Clearbutton.TabIndex = 49;
-            this.Clearbutton.Text = "Clear";
-            this.Clearbutton.UseVisualStyleBackColor = true;
-            this.Clearbutton.Click += new System.EventHandler(this.Clearbutton_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(718, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
-            this.label3.TabIndex = 56;
-            this.label3.Text = "Height";
-            // 
-            // paintbutton
-            // 
-            this.paintbutton.Location = new System.Drawing.Point(896, 130);
-            this.paintbutton.Name = "paintbutton";
-            this.paintbutton.Size = new System.Drawing.Size(82, 23);
-            this.paintbutton.TabIndex = 59;
-            this.paintbutton.Text = "Paint";
-            this.paintbutton.UseVisualStyleBackColor = true;
-            this.paintbutton.Click += new System.EventHandler(this.paintbutton_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel1.Controls.Add(this.PictureBox);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(14, 169);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1013, 546);
-            this.flowLayoutPanel1.TabIndex = 65;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(20, 8);
-            this.flowLayoutPanel2.TabIndex = 0;
-            // 
-            // PictureBox
-            // 
-            this.PictureBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PictureBox.Location = new System.Drawing.Point(29, 3);
-            this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(949, 517);
-            this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.PictureBox.TabIndex = 12;
-            this.PictureBox.TabStop = false;
-            // 
-            // NumOfStatesButton
-            // 
-            this.NumOfStatesButton.Location = new System.Drawing.Point(941, 296);
-            this.NumOfStatesButton.Name = "NumOfStatesButton";
-            this.NumOfStatesButton.Size = new System.Drawing.Size(86, 23);
-            this.NumOfStatesButton.TabIndex = 45;
-            this.NumOfStatesButton.Text = "Get # States";
-            this.NumOfStatesButton.UseVisualStyleBackColor = true;
-            // 
-            // Linkwidth_groupBox
-            // 
-            this.Linkwidth_groupBox.Controls.Add(this.YCbCr420groupbox);
-            this.Linkwidth_groupBox.Controls.Add(this.YCbCr422groupbox);
-            this.Linkwidth_groupBox.Controls.Add(this.RGBgroupbox);
-            this.Linkwidth_groupBox.Controls.Add(this.YCbCr420button);
-            this.Linkwidth_groupBox.Controls.Add(this.YCbCr422button);
-            this.Linkwidth_groupBox.Controls.Add(this.YCbCr444button);
-            this.Linkwidth_groupBox.Controls.Add(this.RGBbutton);
-            this.Linkwidth_groupBox.Location = new System.Drawing.Point(177, 16);
-            this.Linkwidth_groupBox.Name = "Linkwidth_groupBox";
-            this.Linkwidth_groupBox.Size = new System.Drawing.Size(415, 147);
-            this.Linkwidth_groupBox.TabIndex = 54;
-            this.Linkwidth_groupBox.TabStop = false;
-            this.Linkwidth_groupBox.Text = "Pixel Format";
-            // 
-            // YCbCr420groupbox
-            // 
-            this.YCbCr420groupbox.Controls.Add(this.YCbCr420_24button);
-            this.YCbCr420groupbox.Controls.Add(this.YCbCr12button);
-            this.YCbCr420groupbox.Controls.Add(this.YCbCr15button);
-            this.YCbCr420groupbox.Controls.Add(this.YCbCr18button);
-            this.YCbCr420groupbox.Location = new System.Drawing.Point(97, 102);
-            this.YCbCr420groupbox.Name = "YCbCr420groupbox";
-            this.YCbCr420groupbox.Size = new System.Drawing.Size(299, 32);
-            this.YCbCr420groupbox.TabIndex = 43;
-            this.YCbCr420groupbox.TabStop = false;
-            this.YCbCr420groupbox.Text = "Width (bits/bbp)";
-            // 
-            // YCbCr420_24button
-            // 
-            this.YCbCr420_24button.AutoSize = true;
-            this.YCbCr420_24button.Location = new System.Drawing.Point(195, 12);
-            this.YCbCr420_24button.Name = "YCbCr420_24button";
-            this.YCbCr420_24button.Size = new System.Drawing.Size(37, 17);
-            this.YCbCr420_24button.TabIndex = 8;
-            this.YCbCr420_24button.TabStop = true;
-            this.YCbCr420_24button.Text = "24";
-            this.YCbCr420_24button.UseVisualStyleBackColor = true;
-            // 
-            // YCbCr12button
-            // 
-            this.YCbCr12button.AutoSize = true;
-            this.YCbCr12button.Location = new System.Drawing.Point(39, 12);
-            this.YCbCr12button.Name = "YCbCr12button";
-            this.YCbCr12button.Size = new System.Drawing.Size(37, 17);
-            this.YCbCr12button.TabIndex = 5;
-            this.YCbCr12button.TabStop = true;
-            this.YCbCr12button.Text = "12";
-            this.YCbCr12button.UseVisualStyleBackColor = true;
-            // 
-            // YCbCr15button
-            // 
-            this.YCbCr15button.AutoSize = true;
-            this.YCbCr15button.Location = new System.Drawing.Point(91, 12);
-            this.YCbCr15button.Name = "YCbCr15button";
-            this.YCbCr15button.Size = new System.Drawing.Size(37, 17);
-            this.YCbCr15button.TabIndex = 6;
-            this.YCbCr15button.TabStop = true;
-            this.YCbCr15button.Text = "15";
-            this.YCbCr15button.UseVisualStyleBackColor = true;
-            // 
-            // YCbCr18button
-            // 
-            this.YCbCr18button.AutoSize = true;
-            this.YCbCr18button.Location = new System.Drawing.Point(143, 12);
-            this.YCbCr18button.Name = "YCbCr18button";
-            this.YCbCr18button.Size = new System.Drawing.Size(37, 17);
-            this.YCbCr18button.TabIndex = 7;
-            this.YCbCr18button.TabStop = true;
-            this.YCbCr18button.Text = "18";
-            this.YCbCr18button.UseVisualStyleBackColor = true;
-            // 
-            // YCbCr422groupbox
-            // 
-            this.YCbCr422groupbox.Controls.Add(this.YCbCr32button);
-            this.YCbCr422groupbox.Controls.Add(this.YCbCr16button);
-            this.YCbCr422groupbox.Controls.Add(this.YCbCr20button);
-            this.YCbCr422groupbox.Controls.Add(this.YCbCr24button);
-            this.YCbCr422groupbox.Location = new System.Drawing.Point(97, 67);
-            this.YCbCr422groupbox.Name = "YCbCr422groupbox";
-            this.YCbCr422groupbox.Size = new System.Drawing.Size(299, 32);
-            this.YCbCr422groupbox.TabIndex = 42;
-            this.YCbCr422groupbox.TabStop = false;
-            this.YCbCr422groupbox.Text = "Width (bits/bbp)";
-            // 
-            // YCbCr32button
-            // 
-            this.YCbCr32button.AutoSize = true;
-            this.YCbCr32button.Location = new System.Drawing.Point(195, 12);
-            this.YCbCr32button.Name = "YCbCr32button";
-            this.YCbCr32button.Size = new System.Drawing.Size(37, 17);
-            this.YCbCr32button.TabIndex = 8;
-            this.YCbCr32button.TabStop = true;
-            this.YCbCr32button.Text = "32";
-            this.YCbCr32button.UseVisualStyleBackColor = true;
-            // 
-            // YCbCr16button
-            // 
-            this.YCbCr16button.AutoSize = true;
-            this.YCbCr16button.Location = new System.Drawing.Point(39, 12);
-            this.YCbCr16button.Name = "YCbCr16button";
-            this.YCbCr16button.Size = new System.Drawing.Size(37, 17);
-            this.YCbCr16button.TabIndex = 5;
-            this.YCbCr16button.TabStop = true;
-            this.YCbCr16button.Text = "16";
-            this.YCbCr16button.UseVisualStyleBackColor = true;
-            // 
-            // YCbCr20button
-            // 
-            this.YCbCr20button.AutoSize = true;
-            this.YCbCr20button.Location = new System.Drawing.Point(91, 12);
-            this.YCbCr20button.Name = "YCbCr20button";
-            this.YCbCr20button.Size = new System.Drawing.Size(37, 17);
-            this.YCbCr20button.TabIndex = 6;
-            this.YCbCr20button.TabStop = true;
-            this.YCbCr20button.Text = "20";
-            this.YCbCr20button.UseVisualStyleBackColor = true;
-            // 
-            // YCbCr24button
-            // 
-            this.YCbCr24button.AutoSize = true;
-            this.YCbCr24button.Location = new System.Drawing.Point(143, 12);
-            this.YCbCr24button.Name = "YCbCr24button";
-            this.YCbCr24button.Size = new System.Drawing.Size(37, 17);
-            this.YCbCr24button.TabIndex = 7;
-            this.YCbCr24button.TabStop = true;
-            this.YCbCr24button.Text = "24";
-            this.YCbCr24button.UseVisualStyleBackColor = true;
-            // 
-            // RGBgroupbox
-            // 
-            this.RGBgroupbox.Controls.Add(this.RGB36button);
-            this.RGBgroupbox.Controls.Add(this.RGB18button);
-            this.RGBgroupbox.Controls.Add(this.RGB24button);
-            this.RGBgroupbox.Controls.Add(this.RGB30button);
-            this.RGBgroupbox.Controls.Add(this.RGB48button);
-            this.RGBgroupbox.Location = new System.Drawing.Point(97, 27);
-            this.RGBgroupbox.Name = "RGBgroupbox";
-            this.RGBgroupbox.Size = new System.Drawing.Size(299, 32);
-            this.RGBgroupbox.TabIndex = 41;
-            this.RGBgroupbox.TabStop = false;
-            this.RGBgroupbox.Text = "Width (bits/bbp)";
-            // 
-            // RGB36button
-            // 
-            this.RGB36button.AutoSize = true;
-            this.RGB36button.Location = new System.Drawing.Point(195, 12);
-            this.RGB36button.Name = "RGB36button";
-            this.RGB36button.Size = new System.Drawing.Size(37, 17);
-            this.RGB36button.TabIndex = 8;
-            this.RGB36button.TabStop = true;
-            this.RGB36button.Text = "36";
-            this.RGB36button.UseVisualStyleBackColor = true;
-            // 
-            // RGB18button
-            // 
-            this.RGB18button.AutoSize = true;
-            this.RGB18button.Location = new System.Drawing.Point(39, 12);
-            this.RGB18button.Name = "RGB18button";
-            this.RGB18button.Size = new System.Drawing.Size(37, 17);
-            this.RGB18button.TabIndex = 5;
-            this.RGB18button.TabStop = true;
-            this.RGB18button.Text = "18";
-            this.RGB18button.UseVisualStyleBackColor = true;
-            // 
-            // RGB24button
-            // 
-            this.RGB24button.AutoSize = true;
-            this.RGB24button.Location = new System.Drawing.Point(91, 12);
-            this.RGB24button.Name = "RGB24button";
-            this.RGB24button.Size = new System.Drawing.Size(37, 17);
-            this.RGB24button.TabIndex = 6;
-            this.RGB24button.TabStop = true;
-            this.RGB24button.Text = "24";
-            this.RGB24button.UseVisualStyleBackColor = true;
-            // 
-            // RGB30button
-            // 
-            this.RGB30button.AutoSize = true;
-            this.RGB30button.Location = new System.Drawing.Point(143, 12);
-            this.RGB30button.Name = "RGB30button";
-            this.RGB30button.Size = new System.Drawing.Size(37, 17);
-            this.RGB30button.TabIndex = 7;
-            this.RGB30button.TabStop = true;
-            this.RGB30button.Text = "30";
-            this.RGB30button.UseVisualStyleBackColor = true;
-            // 
-            // RGB48button
-            // 
-            this.RGB48button.AutoSize = true;
-            this.RGB48button.Location = new System.Drawing.Point(247, 12);
-            this.RGB48button.Name = "RGB48button";
-            this.RGB48button.Size = new System.Drawing.Size(37, 17);
-            this.RGB48button.TabIndex = 9;
-            this.RGB48button.TabStop = true;
-            this.RGB48button.Text = "48";
-            this.RGB48button.UseVisualStyleBackColor = true;
-            // 
-            // YCbCr420button
-            // 
-            this.YCbCr420button.AutoSize = true;
-            this.YCbCr420button.Location = new System.Drawing.Point(6, 114);
-            this.YCbCr420button.Name = "YCbCr420button";
-            this.YCbCr420button.Size = new System.Drawing.Size(82, 17);
-            this.YCbCr420button.TabIndex = 40;
-            this.YCbCr420button.TabStop = true;
-            this.YCbCr420button.Text = "YCbCr 4:2:0";
-            this.YCbCr420button.UseVisualStyleBackColor = true;
-            this.YCbCr420button.CheckedChanged += new System.EventHandler(this.YCbCr420button_CheckedChanged);
-            // 
-            // YCbCr422button
-            // 
-            this.YCbCr422button.AutoSize = true;
-            this.YCbCr422button.Location = new System.Drawing.Point(6, 82);
-            this.YCbCr422button.Name = "YCbCr422button";
-            this.YCbCr422button.Size = new System.Drawing.Size(82, 17);
-            this.YCbCr422button.TabIndex = 39;
-            this.YCbCr422button.TabStop = true;
-            this.YCbCr422button.Text = "YCbCr 4:2:2";
-            this.YCbCr422button.UseVisualStyleBackColor = true;
-            this.YCbCr422button.CheckedChanged += new System.EventHandler(this.YCbCr422button_CheckedChanged);
-            // 
-            // YCbCr444button
-            // 
-            this.YCbCr444button.AutoSize = true;
-            this.YCbCr444button.Location = new System.Drawing.Point(6, 50);
-            this.YCbCr444button.Name = "YCbCr444button";
-            this.YCbCr444button.Size = new System.Drawing.Size(82, 17);
-            this.YCbCr444button.TabIndex = 38;
-            this.YCbCr444button.TabStop = true;
-            this.YCbCr444button.Text = "YCbCr 4:4:4";
-            this.YCbCr444button.UseVisualStyleBackColor = true;
-            this.YCbCr444button.CheckedChanged += new System.EventHandler(this.YCbCr444button_CheckedChanged);
-            // 
-            // RGBbutton
-            // 
-            this.RGBbutton.AutoSize = true;
-            this.RGBbutton.Location = new System.Drawing.Point(6, 27);
-            this.RGBbutton.Name = "RGBbutton";
-            this.RGBbutton.Size = new System.Drawing.Size(48, 17);
-            this.RGBbutton.TabIndex = 37;
-            this.RGBbutton.TabStop = true;
-            this.RGBbutton.Text = "RGB";
-            this.RGBbutton.UseVisualStyleBackColor = true;
-            this.RGBbutton.CheckedChanged += new System.EventHandler(this.RGBbutton_CheckedChanged);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.lane4button);
             this.groupBox3.Controls.Add(this.Lane2button);
             this.groupBox3.Controls.Add(this.Lane1button);
-            this.groupBox3.Location = new System.Drawing.Point(94, 18);
+            this.groupBox3.Location = new System.Drawing.Point(97, 14);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(77, 118);
-            this.groupBox3.TabIndex = 53;
+            this.groupBox3.TabIndex = 76;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Link Width";
             // 
@@ -510,10 +117,10 @@
             this.groupBox1.Controls.Add(this.DP1_4SSTbutton);
             this.groupBox1.Controls.Add(this.DP1_2MSTbutton);
             this.groupBox1.Controls.Add(this.DP1_2SSTbutton);
-            this.groupBox1.Location = new System.Drawing.Point(14, 16);
+            this.groupBox1.Location = new System.Drawing.Point(17, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(77, 120);
-            this.groupBox1.TabIndex = 52;
+            this.groupBox1.TabIndex = 75;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Protocol";
             // 
@@ -573,10 +180,10 @@
             this.panel2.Controls.Add(this.VC3button);
             this.panel2.Controls.Add(this.VC2button);
             this.panel2.Controls.Add(this.VC1button);
-            this.panel2.Location = new System.Drawing.Point(596, 34);
+            this.panel2.Location = new System.Drawing.Point(180, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(95, 119);
-            this.panel2.TabIndex = 46;
+            this.panel2.TabIndex = 71;
             // 
             // VC4button
             // 
@@ -631,112 +238,204 @@
             this.VC1button.Text = "VC 1";
             this.VC1button.UseVisualStyleBackColor = true;
             // 
-            // StateIndexLabel
+            // statusStrip1
             // 
-            this.StateIndexLabel.AutoSize = true;
-            this.StateIndexLabel.Location = new System.Drawing.Point(893, 79);
-            this.StateIndexLabel.Name = "StateIndexLabel";
-            this.StateIndexLabel.Size = new System.Drawing.Size(57, 13);
-            this.StateIndexLabel.TabIndex = 7;
-            this.StateIndexLabel.Text = "Start State";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 592);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1144, 22);
+            this.statusStrip1.TabIndex = 85;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // StateNumberNumericUpDown
+            // toolStripStatusLabel1
             // 
-            this.StateNumberNumericUpDown.Location = new System.Drawing.Point(896, 95);
-            this.StateNumberNumericUpDown.Maximum = new decimal(new int[] {
-            1215752192,
-            23,
-            0,
-            0});
-            this.StateNumberNumericUpDown.Name = "StateNumberNumericUpDown";
-            this.StateNumberNumericUpDown.Size = new System.Drawing.Size(96, 20);
-            this.StateNumberNumericUpDown.TabIndex = 4;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatusLabel1.Text = "Ready";
             // 
-            // progressBar1
+            // toolStripProgressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(43, 721);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(949, 23);
-            this.progressBar1.TabIndex = 67;
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
+            // 
+            // DataFolderPath_TextBox
+            // 
+            this.DataFolderPath_TextBox.Location = new System.Drawing.Point(281, 83);
+            this.DataFolderPath_TextBox.Name = "DataFolderPath_TextBox";
+            this.DataFolderPath_TextBox.Size = new System.Drawing.Size(180, 20);
+            this.DataFolderPath_TextBox.TabIndex = 91;
+            this.DataFolderPath_TextBox.Text = "C:\\\\";
+            this.DataFolderPath_TextBox.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(278, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.TabIndex = 92;
+            this.label2.Text = "Folder Path";
+            this.label2.Visible = false;
+            // 
+            // Browsebutton
+            // 
+            this.Browsebutton.Location = new System.Drawing.Point(379, 105);
+            this.Browsebutton.Name = "Browsebutton";
+            this.Browsebutton.Size = new System.Drawing.Size(82, 23);
+            this.Browsebutton.TabIndex = 93;
+            this.Browsebutton.Text = "Browse";
+            this.Browsebutton.UseVisualStyleBackColor = true;
+            this.Browsebutton.Visible = false;
+            this.Browsebutton.Click += new System.EventHandler(this.Browsebutton_Click);
+            // 
+            // GetFramesbutton
+            // 
+            this.GetFramesbutton.Location = new System.Drawing.Point(86, 490);
+            this.GetFramesbutton.Name = "GetFramesbutton";
+            this.GetFramesbutton.Size = new System.Drawing.Size(76, 23);
+            this.GetFramesbutton.TabIndex = 94;
+            this.GetFramesbutton.Text = "Get Frames";
+            this.GetFramesbutton.UseVisualStyleBackColor = true;
+            this.GetFramesbutton.Click += new System.EventHandler(this.GetFramesbutton_Click);
+            // 
+            // FramesPanel
+            // 
+            this.FramesPanel.AutoScroll = true;
+            this.FramesPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.FramesPanel.Location = new System.Drawing.Point(17, 138);
+            this.FramesPanel.Name = "FramesPanel";
+            this.FramesPanel.Size = new System.Drawing.Size(145, 346);
+            this.FramesPanel.TabIndex = 95;
+            // 
+            // getstatesButton
+            // 
+            this.getstatesButton.Location = new System.Drawing.Point(514, 490);
+            this.getstatesButton.Name = "getstatesButton";
+            this.getstatesButton.Size = new System.Drawing.Size(96, 23);
+            this.getstatesButton.TabIndex = 96;
+            this.getstatesButton.Text = "Get Start States";
+            this.getstatesButton.UseVisualStyleBackColor = true;
+            this.getstatesButton.Click += new System.EventHandler(this.getstatesButton_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(168, 138);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(544, 346);
+            this.richTextBox1.TabIndex = 97;
+            this.richTextBox1.Text = "";
+            // 
+            // CancelButton
+            // 
+            this.CancelButton.Location = new System.Drawing.Point(17, 490);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(69, 23);
+            this.CancelButton.TabIndex = 98;
+            this.CancelButton.Text = "Cancel";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // ComparePicturesButton
+            // 
+            this.ComparePicturesButton.Location = new System.Drawing.Point(828, 490);
+            this.ComparePicturesButton.Name = "ComparePicturesButton";
+            this.ComparePicturesButton.Size = new System.Drawing.Size(104, 23);
+            this.ComparePicturesButton.TabIndex = 100;
+            this.ComparePicturesButton.Text = "Compare Pictures";
+            this.ComparePicturesButton.UseVisualStyleBackColor = true;
+            this.ComparePicturesButton.Click += new System.EventHandler(this.ComparePicturesButton_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(718, 490);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(104, 23);
+            this.DeleteButton.TabIndex = 101;
+            this.DeleteButton.Text = "Delete Checked Pics";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Visible = false;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // TestChecked
+            // 
+            this.TestChecked.Location = new System.Drawing.Point(737, 556);
+            this.TestChecked.Name = "TestChecked";
+            this.TestChecked.Size = new System.Drawing.Size(104, 23);
+            this.TestChecked.TabIndex = 102;
+            this.TestChecked.Text = "Test Checked Pics";
+            this.TestChecked.UseVisualStyleBackColor = true;
+            this.TestChecked.Visible = false;
+            this.TestChecked.Click += new System.EventHandler(this.TestChecked_Click);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.Location = new System.Drawing.Point(616, 490);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(96, 23);
+            this.ClearButton.TabIndex = 103;
+            this.ClearButton.Text = "Clear Text";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            // 
+            // LoadReferenceButton
+            // 
+            this.LoadReferenceButton.Location = new System.Drawing.Point(828, 111);
+            this.LoadReferenceButton.Name = "LoadReferenceButton";
+            this.LoadReferenceButton.Size = new System.Drawing.Size(104, 23);
+            this.LoadReferenceButton.TabIndex = 104;
+            this.LoadReferenceButton.Text = "Load Reference";
+            this.LoadReferenceButton.UseVisualStyleBackColor = true;
+            this.LoadReferenceButton.Click += new System.EventHandler(this.LoadReferenceButton_Click);
+            // 
+            // ComparePanel
+            // 
+            this.ComparePanel.BackColor = System.Drawing.SystemColors.Control;
+            this.ComparePanel.Location = new System.Drawing.Point(718, 140);
+            this.ComparePanel.Name = "ComparePanel";
+            this.ComparePanel.Size = new System.Drawing.Size(214, 344);
+            this.ComparePanel.TabIndex = 105;
             // 
             // FrameVideoRendererCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.WidthnumericUpDown);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.Savebutton);
-            this.Controls.Add(this.StateIndexLabel);
-            this.Controls.Add(this.HeightnumericUpDown);
-            this.Controls.Add(this.Clearbutton);
-            this.Controls.Add(this.StateNumberNumericUpDown);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.paintbutton);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.NumOfStatesButton);
-            this.Controls.Add(this.Linkwidth_groupBox);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.ComparePanel);
+            this.Controls.Add(this.LoadReferenceButton);
+            this.Controls.Add(this.ClearButton);
+            this.Controls.Add(this.TestChecked);
+            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.ComparePicturesButton);
+            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.getstatesButton);
+            this.Controls.Add(this.FramesPanel);
+            this.Controls.Add(this.GetFramesbutton);
+            this.Controls.Add(this.Browsebutton);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.DataFolderPath_TextBox);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
             this.Name = "FrameVideoRendererCtrl";
-            this.Size = new System.Drawing.Size(1341, 768);
-            ((System.ComponentModel.ISupportInitialize)(this.WidthnumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeightnumericUpDown)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
-            this.Linkwidth_groupBox.ResumeLayout(false);
-            this.Linkwidth_groupBox.PerformLayout();
-            this.YCbCr420groupbox.ResumeLayout(false);
-            this.YCbCr420groupbox.PerformLayout();
-            this.YCbCr422groupbox.ResumeLayout(false);
-            this.YCbCr422groupbox.PerformLayout();
-            this.RGBgroupbox.ResumeLayout(false);
-            this.RGBgroupbox.PerformLayout();
+            this.Size = new System.Drawing.Size(1144, 614);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.StateNumberNumericUpDown)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.NumericUpDown WidthnumericUpDown;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button Savebutton;
-        private System.Windows.Forms.NumericUpDown HeightnumericUpDown;
-        private System.Windows.Forms.Button Clearbutton;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button paintbutton;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.PictureBox PictureBox;
-        private System.Windows.Forms.Button NumOfStatesButton;
-        private System.Windows.Forms.GroupBox Linkwidth_groupBox;
-        private System.Windows.Forms.GroupBox YCbCr422groupbox;
-        private System.Windows.Forms.RadioButton YCbCr32button;
-        private System.Windows.Forms.RadioButton YCbCr16button;
-        private System.Windows.Forms.RadioButton YCbCr20button;
-        private System.Windows.Forms.RadioButton YCbCr24button;
-        private System.Windows.Forms.GroupBox RGBgroupbox;
-        private System.Windows.Forms.RadioButton RGB36button;
-        private System.Windows.Forms.RadioButton RGB18button;
-        private System.Windows.Forms.RadioButton RGB24button;
-        private System.Windows.Forms.RadioButton RGB30button;
-        private System.Windows.Forms.RadioButton RGB48button;
-        private System.Windows.Forms.RadioButton YCbCr420button;
-        private System.Windows.Forms.RadioButton YCbCr422button;
-        private System.Windows.Forms.RadioButton YCbCr444button;
-        private System.Windows.Forms.RadioButton RGBbutton;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton lane4button;
         private System.Windows.Forms.RadioButton Lane2button;
@@ -751,14 +450,23 @@
         private System.Windows.Forms.Label VChannelLabel;
         private System.Windows.Forms.RadioButton VC3button;
         private System.Windows.Forms.RadioButton VC2button;
-        private System.Windows.Forms.Label StateIndexLabel;
         private System.Windows.Forms.RadioButton VC1button;
-        private System.Windows.Forms.NumericUpDown StateNumberNumericUpDown;
-        private System.Windows.Forms.GroupBox YCbCr420groupbox;
-        private System.Windows.Forms.RadioButton YCbCr420_24button;
-        private System.Windows.Forms.RadioButton YCbCr12button;
-        private System.Windows.Forms.RadioButton YCbCr15button;
-        private System.Windows.Forms.RadioButton YCbCr18button;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.TextBox DataFolderPath_TextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button Browsebutton;
+        private System.Windows.Forms.Button GetFramesbutton;
+        private System.Windows.Forms.FlowLayoutPanel FramesPanel;
+        private System.Windows.Forms.Button getstatesButton;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button ComparePicturesButton;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Button TestChecked;
+        private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.Button LoadReferenceButton;
+        private System.Windows.Forms.FlowLayoutPanel ComparePanel;
     }
 }
