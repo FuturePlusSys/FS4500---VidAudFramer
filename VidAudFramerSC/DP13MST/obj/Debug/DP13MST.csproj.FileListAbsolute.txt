@@ -1,0 +1,22 @@
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\DisplayPort PM Gen 3\PixelRenderer\DP13MST\obj\Debug\DP13MST.csprojResolveAssemblyReference.cache
+C:\Users\Paul\Documents\FuturePlus\PM 2015\PixelRenderer\DP13MST\obj\Debug\DP13MST.csprojResolveAssemblyReference.cache
+C:\Users\Paul\Documents\FuturePlus\PM 2015\PixelRenderer\DP13MST\bin\Debug\DP13MST.dll
+C:\Users\Paul\Documents\FuturePlus\PM 2015\PixelRenderer\DP13MST\bin\Debug\DP13MST.pdb
+C:\Users\Paul\Documents\FuturePlus\PM 2015\PixelRenderer\DP13MST\bin\Debug\ClassLibrary1.dll
+C:\Users\Paul\Documents\FuturePlus\PM 2015\PixelRenderer\DP13MST\bin\Debug\ClassLibrary1.pdb
+C:\Users\Paul\Documents\FuturePlus\PM 2015\PixelRenderer\DP13MST\obj\Debug\DP13MST.dll
+C:\Users\Paul\Documents\FuturePlus\PM 2015\PixelRenderer\DP13MST\obj\Debug\DP13MST.pdb
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP13MST\bin\Debug\DP13MST.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP13MST\bin\Debug\DP13MST.pdb
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP13MST\bin\Debug\ClassLibrary1.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP13MST\bin\Debug\ClassLibrary1.pdb
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP13MST\obj\Debug\DP13MST.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP13MST\obj\Debug\DP13MST.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP13MST\obj\Debug\DP13MST.pdb
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP13MST\bin\Debug\DP13MST.dll
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP13MST\bin\Debug\DP13MST.pdb
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP13MST\bin\Debug\FPSProbeMgrInterface.dll
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP13MST\bin\Debug\FPSProbeMgrInterface.pdb
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP13MST\obj\Debug\DP13MST.csprojResolveAssemblyReference.cache
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP13MST\obj\Debug\DP13MST.dll
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP13MST\obj\Debug\DP13MST.pdb
