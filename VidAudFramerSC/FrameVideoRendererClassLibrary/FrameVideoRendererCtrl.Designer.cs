@@ -387,7 +387,6 @@
             this.LoadReferenceButton.TabIndex = 104;
             this.LoadReferenceButton.Text = "Load Reference";
             this.LoadReferenceButton.UseVisualStyleBackColor = true;
-            this.LoadReferenceButton.Visible = false;
             this.LoadReferenceButton.Click += new System.EventHandler(this.LoadReferenceButton_Click);
             // 
             // ComparePanel

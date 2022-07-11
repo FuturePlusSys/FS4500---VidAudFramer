@@ -482,7 +482,6 @@
             this.AnalyseLinesButton.TabIndex = 11;
             this.AnalyseLinesButton.Text = "AnalyzeLines";
             this.AnalyseLinesButton.UseVisualStyleBackColor = true;
-            this.AnalyseLinesButton.Visible = false;
             this.AnalyseLinesButton.Click += new System.EventHandler(this.AnalyseLinesButton_Click);
             // 
             // PixelLineDataRichText
@@ -492,7 +491,6 @@
             this.PixelLineDataRichText.Size = new System.Drawing.Size(370, 102);
             this.PixelLineDataRichText.TabIndex = 12;
             this.PixelLineDataRichText.Text = "";
-            this.PixelLineDataRichText.Visible = false;
             this.PixelLineDataRichText.WordWrap = false;
             // 
             // SettingsRichTextBox
