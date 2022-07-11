@@ -1,0 +1,161 @@
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\DP12MST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\DP14MST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\DP14SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\FPSGen2ProbeMgrInterface.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\NAudio.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\DP12MST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\DP14MST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\DP14SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\FPSGen2ProbeMgrInterface.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\Interop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\bin\Release\AxInterop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\obj\Release\Interop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\obj\Release\AxInterop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.ResolveComReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.AudioRendererCtrl.resources
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.GenerateResource.Cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\DP12MST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\DP14MST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\DP14SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\FPSGen2ProbeMgrInterface.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\NAudio.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\DP12MST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\DP14MST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\DP14SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\FPSGen2ProbeMgrInterface.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\Interop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\bin\Release\AxInterop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\obj\Release\Interop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\obj\Release\AxInterop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.ResolveComReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.AudioRendererCtrl.resources
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.GenerateResource.Cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12MST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14MST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\FPSProbeMgrInterface.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\NAudio.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12MST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14MST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\Interop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AxInterop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\Interop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AxInterop.WMPLib.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.ResolveComReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.AudioRendererCtrl.resources
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.GenerateResource.Cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12MST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12SST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14MST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14SST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\FPSProbeMgrInterface.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\NAudio.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12MST.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12SST.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14MST.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14SST.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\Interop.WMPLib.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AxInterop.WMPLib.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\Interop.WMPLib.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AxInterop.WMPLib.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.ResolveComReference.cache
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.AudioRendererCtrl.resources
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.GenerateResource.Cache
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12MST.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12SST.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14MST.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14SST.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\FPSProbeMgrInterface.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\NAudio.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12MST.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP12SST.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14MST.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\DP14SST.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\Interop.WMPLib.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\bin\Release\AxInterop.WMPLib.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\Interop.WMPLib.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AxInterop.WMPLib.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.ResolveComReference.cache
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.AudioRendererCtrl.resources
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.GenerateResource.Cache
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.ErrorForm.resources
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\DP12MST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\DP12SST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\DP14MST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\DP14SST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\FPSProbeMgrInterface.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\NAudio.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\DP12MST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\DP12SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\DP14MST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\DP14SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\Interop.WMPLib.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\bin\Release\AxInterop.WMPLib.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\Interop.WMPLib.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\AxInterop.WMPLib.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.ResolveComReference.cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.AudioRendererCtrl.resources
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.ErrorForm.resources
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.GenerateResource.Cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\AudioRendererClassLibrary.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\DP12MST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\DP12SST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\DP14MST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\DP14SST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\FPSProbeMgrInterface.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\NAudio.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\DP12MST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\DP12SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\DP14MST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\DP14SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\Interop.WMPLib.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\bin\Release\AxInterop.WMPLib.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\Interop.WMPLib.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AxInterop.WMPLib.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.ResolveComReference.cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.AudioRendererCtrl.resources
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.ErrorForm.resources
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.GenerateResource.Cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.AssemblyReference.cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\AudioRendererClassLibrary\obj\Release\AudioRendererClassLibrary.csproj.CopyComplete
