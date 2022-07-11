@@ -4,3 +4,5 @@ To learn more about the FS4500 see https://www.futureplus.com/display-port-fs450
 To learn more about FuturePlus Systems see www.futureplus.com
 
 When using this code the FS4500 Probe Manager must be open and the acquired data loaded into the probe manager.  When using a stored data file make sure the protocol type is correct (SST, MST DP 1.2, DP1.4) or the file will not load.
+
+To run this app through the source code, install the .exe first. This will ensure that xml files are in the right place.
