@@ -1,0 +1,97 @@
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP12SST\bin\Debug\ClassLibrary1.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP12SST\bin\Debug\ClassLibrary1.pdb
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 3\DP12SST\obj\Debug\DP12SST.pdb
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP12SST\bin\Debug\DP12SST.dll
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP12SST\bin\Debug\DP12SST.pdb
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP12SST\bin\Debug\FPSProbeMgrInterface.pdb
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP12SST\obj\Debug\DP12SST.dll
+Z:\PaulSirois_CodeProjects\PM 2015\PixelRenderer Rev 6\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 9\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 9\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 9\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 9\DP12SST\bin\Debug\FPSProbeMgrInterface.pdb
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 9\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 9\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\FuturePlus\PM 2015\PixelRenderer Rev 9\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Rev 9\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Rev 9\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Rev 9\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Rev 9\DP12SST\bin\Debug\FPSProbeMgrInterface.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Rev 9\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Rev 9\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Rev 9\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer_StateDataInterfaces\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer_StateDataInterfaces\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer_StateDataInterfaces\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer_StateDataInterfaces\DP12SST\bin\Debug\FPSProbeMgrInterface.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer_StateDataInterfaces\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer_StateDataInterfaces\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer_StateDataInterfaces\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\DP12SST\bin\Debug\FPSGen2ProbeMgrInterface.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\DP12SST\bin\Debug\FPSGen2ProbeMgrInterface.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0011\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\DP12SST\bin\Debug\FPSGen2ProbeMgrInterface.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\DP12SST\bin\Debug\FPSGen2ProbeMgrInterface.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0012\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\PaulS\Documents\ProbeManagers\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\Sean Finegan\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\jgrim\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\jgrim\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\jgrim\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\jgrim\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\jgrim\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\jgrim\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.csprojAssemblyReference.cache
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.csproj.CoreCompileInputs.cache
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.00.0013\DP12SST\obj\Debug\DP12SST.csproj.CopyComplete
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.04\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.04\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.04\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.04\DP12SST\obj\Debug\DP12SST.csprojAssemblyReference.cache
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.04\DP12SST\obj\Debug\DP12SST.csproj.CoreCompileInputs.cache
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.04\DP12SST\obj\Debug\DP12SST.csproj.CopyComplete
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.04\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\jgrim\OneDrive\Documents\PixelRenderer Version 2.04\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\DP12SST\obj\Debug\DP12SST.csprojResolveAssemblyReference.cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.04\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\DP12SST\bin\Debug\DP12SST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\DP12SST\bin\Debug\DP12SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\DP12SST\bin\Debug\FPSProbeMgrInterface.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\DP12SST\obj\Debug\DP12SST.csproj.CoreCompileInputs.cache
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\DP12SST\obj\Debug\DP12SST.csproj.CopyComplete
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\DP12SST\obj\Debug\DP12SST.dll
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\DP12SST\obj\Debug\DP12SST.pdb
+C:\Users\jgrim\Documents\Projects\PixelRenderer Version 2.05\DP12SST\obj\Debug\DP12SST.csproj.AssemblyReference.cache
