@@ -411,13 +411,6 @@ namespace FrameVideoRendererClassLibrary
                     Runerror err = new Runerror(error);
                     err.Show();
                 }
-                else if (vc != m_IProbe.GetTriggerChannelID() && m_IProbe.GetTriggerChannelID() != 0)
-                {
-                    error = "Wrong VC Selected";
-                    errorflag = true;
-                    Runerror err = new Runerror(error);
-                    err.Show();
-                }
                 else
                 {
                     states = (int)m_IProbe.GetNumberOfStates(vc);

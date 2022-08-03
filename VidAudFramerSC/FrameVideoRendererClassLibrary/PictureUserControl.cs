@@ -1233,28 +1233,6 @@ namespace FrameVideoRendererClassLibrary
                         StringBuilder sb = Geteventcode(stateData);
                         if (sb.ToString() == "0x88" || sb.ToString() == "0xC8") //If pixel state
                         {
-                            if (w >= (int)WidthnumericUpDown.Value) //If w equals the inputed width, width most be to small
-                            {
-                                string e = "Not enough pixel found to fill a line, check MSA, width should equal MSA width.";
-                                Runerror error = new Runerror(e);
-                                this.Invoke(new Action(() =>
-                                {
-                                    error.Show();
-                                }));
-                                errorcheck = true;
-                                break;
-                            }
-                            if (h >= (int)HeightnumericUpDown.Value)
-                            {
-                                string e = "Not enough lines in frame, height to small, check the MSA, Height in the MSA must be same as input Height.";
-                                Runerror error = new Runerror(e);
-                                this.Invoke(new Action(() =>
-                                {
-                                    error.Show();
-                                }));
-                                errorcheck = true;
-                                break;
-                            }
                             if (flag == true) //Adding bits to dummywidth
                             {
                                 if (dummywidth < lanewidth)
